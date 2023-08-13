@@ -3,9 +3,10 @@ from . models import *
 # Create your views here.
 
 def index(request):
-    item = Item.objects.all()
+    number_of_products = 10
+    products = Item.objects.all()[:number_of_products]
 
     context = {
-        'item':item,
+        'products':products,
     }
     return render(request, 'ecom/index.html', context)
