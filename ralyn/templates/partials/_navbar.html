@@ -19,7 +19,7 @@
                       </div>
                     
                     <!-- Logo -->
-                    <div class="logo"><a href="index.html"><img src="images/logo.png" alt="" title=""></a></div>
+                    <div class="logo"><a href="index.html"><img src="{% static 'images/logo.png' %}" alt="" title=""></a></div>
                 </div>
                 <div class="nav-outer clearfix">
                     
@@ -35,12 +35,16 @@
                         
                         <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
-                                <li class=""><a href="#">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li class=""><a href="#">Product</a></li>
-                                <li class=""><a href="#">Blog</a></li>
-                                <li class=""><a href="#">Login</a></li>
-                                <li><a href="contact.html">Contact us</a></li>
+                                <li><a {% if '/' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{% url 'index' %}">Home</a></li>
+                                <li class=""><a href="{% url 'about' %}">About</a></li>
+                                <li class=""><a href="{% url 'products' %}">Product</a></li>
+                                {% comment %} <li class=""><a href="#">Blog</a></li> {% endcomment %}
+                                <li class=""><a href="{% url 'contact' %}">Contact us</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li class=""><a href="{% url 'account_logout' %}">Logout</a></li>
+                                {% else %}
+                                <li class=""><a href="{% url 'account_login' %}">Login</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                         
@@ -102,7 +106,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="index.html" title=""><img src="images/logo-small.png" alt="" title=""></a>
+                    <a href="index.html" title=""><img src="{% static 'images/logo-small.png' %}" alt="" title=""></a>
                 </div>
                 
                 <!-- Right Col -->

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% comment %} {% load i18n %} {% endcomment %}
+{% load account socialaccount %}
+
+{% block head_title %}Sign In{% endblock %}
+
+{% block content %}
+
+<div class="col-12">
+  <div class="row m-3">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+      <h1 class="my-3">Sign In</h1>
+      {% get_providers as socialaccount_providers %}
+
+      {% if socialaccount_providers %}
+      <p class="">Please sign in with one
+      of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+      for an account and sign in below:</p>
+
+      <div class="socialaccount_ballot">
+
+        <ul class="socialaccount_providers">
+          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+
+        <div class="login-or">or</div>
+
+      </div>
+
+      {% include "socialaccount/snippets/login_extra.html" %}
+
+      {% else %}
+      <p class="">If you have not created an account yet, then please
+      <a href="{{ signup_url }}">sign up</a> first.</p>
+      {% endif %}
+
+      <form class="login my-3" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        <div class="form-group mb-3">
+          {{ form|crispy }}
+          {% if redirect_field_value %}
+          <input class="form-control" type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        </div>
+        {% endif %}
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+        <button class="primaryAction btn btn-outline-success" type="submit">Sign In</button>
+      </form>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

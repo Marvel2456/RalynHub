@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'ecom.apps.EcomConfig',
     'erm.apps.ErmConfig',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -155,4 +157,6 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_USERNAME_REQUIRED = False
 
-# LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = 'index'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

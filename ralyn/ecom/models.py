@@ -29,6 +29,13 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 class Order(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
