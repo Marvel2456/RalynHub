@@ -41,139 +41,29 @@
                                 </thead>
                                 
                                 <tbody>
-                                
+                                    {% for item in items %}
                                     <tr>
                                         <td colspan="2" class="prod-column">
                                             <div class="column-box">
                                                 <figure class="prod-thumb">
                                                     <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="images/resource/products/40.png" alt=""></a>
+                                                    <a href="#"><img src="{{item.product.imageURL}}" alt=""></a>
                                                 </figure>
-                                                <h6 class="prod-title">Logech Headphone</h6>
-                                                <div class="prod-text">Color : Brown <br> Quantity : 2</div>
+                                                <h6 class="prod-title">{{item.product.name}}</h6>
+                                                <div class="prod-text">Quantity : {{item.quantity}}</div>
                                             </div>
                                         </td>
                                         
-                                        <td class="price">$32.00</td>
+                                        <td class="price">${{item.product.price}}</td>
                                         <!-- Quantity Box -->
                                         <td class="quantity-box">
                                             <div class="item-quantity">
                                                 <input class="qty-spinner" type="text" value="1" name="quantity">
                                             </div>
                                         </td>
-                                        <td class="sub-total">£219.00</td>
+                                        <td class="sub-total">${{item.get_total}}</td>
                                     </tr>
-                                    
-                                    <tr>
-                                        <td colspan="2" class="prod-column">
-                                            <div class="column-box">
-                                                <figure class="prod-thumb">
-                                                    <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="images/resource/products/41.png" alt=""></a>
-                                                </figure>
-                                                <h6 class="prod-title">Asus Vivobook</h6>
-                                                <div class="prod-text">Color : Brown <br> Quantity : 2</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="price">$19.00</td>
-                                        <!-- Quantity Box -->
-                                        <td class="quantity-box">
-                                            <div class="item-quantity">
-                                                <input class="qty-spinner" type="text" value="1" name="quantity">
-                                            </div>
-                                        </td>
-                                        <td class="sub-total">£318.00</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="2" class="prod-column">
-                                            <div class="column-box">
-                                                <figure class="prod-thumb">
-                                                    <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="images/resource/products/42.png" alt=""></a>
-                                                </figure>
-                                                <h6 class="prod-title">Woolen Huddie</h6>
-                                                <div class="prod-text">Color : Brown <br> Quantity : 2</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="price">$21.00</td>
-                                        <!-- Quantity Box -->
-                                        <td class="quantity-box">
-                                            <div class="item-quantity">
-                                                <input class="qty-spinner" type="text" value="1" name="quantity">
-                                            </div>
-                                        </td>
-                                        <td class="sub-total">£12.00</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="2" class="prod-column">
-                                            <div class="column-box">
-                                                <figure class="prod-thumb">
-                                                    <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="images/resource/products/43.png" alt=""></a>
-                                                </figure>
-                                                <h6 class="prod-title">Woolen Huddie</h6>
-                                                <div class="prod-text">Color : Brown <br> Quantity : 2</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="price">$46.00</td>
-                                        <!-- Quantity Box -->
-                                        <td class="quantity-box">
-                                            <div class="item-quantity">
-                                                <input class="qty-spinner" type="text" value="1" name="quantity">
-                                            </div>
-                                        </td>
-                                        <td class="sub-total">£412.00</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="2" class="prod-column">
-                                            <div class="column-box">
-                                                <figure class="prod-thumb">
-                                                    <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="images/resource/products/44.png" alt=""></a>
-                                                </figure>
-                                                <h6 class="prod-title">Woolen Huddie</h6>
-                                                <div class="prod-text">Color : Brown <br> Quantity : 2</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="price">$13.00</td>
-                                        <!-- Quantity Box -->
-                                        <td class="quantity-box">
-                                            <div class="item-quantity">
-                                                <input class="qty-spinner" type="text" value="1" name="quantity">
-                                            </div>
-                                        </td>
-                                        <td class="sub-total">£21.00</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="2" class="prod-column">
-                                            <div class="column-box">
-                                                <figure class="prod-thumb">
-                                                    <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="images/resource/products/45.png" alt=""></a>
-                                                </figure>
-                                                <h6 class="prod-title">Woolen Huddie</h6>
-                                                <div class="prod-text">Color : Brown <br> Quantity : 2</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="price">$13.00</td>
-                                        <!-- Quantity Box -->
-                                        <td class="quantity-box">
-                                            <div class="item-quantity">
-                                                <input class="qty-spinner" type="text" value="1" name="quantity">
-                                            </div>
-                                        </td>
-                                        <td class="sub-total">£21.00</td>
-                                    </tr>
-                                    
+                                    {% endfor %}   
                                 </tbody>
                             </table>
                         </div>
@@ -194,8 +84,8 @@
                         </div>
                         <div class="cart-total-box">
                             <ul class="cart-totals">
-                                <li>Subtotals : <span>£381.00</span></li>
-                                <li>Totals : <span>£381.00</span></li>
+                                <li>Total Quantity : <span>{{order.get_cart_items}}</span></li>
+                                <li>Totals : <span>${{order.get_cart_total}}</span></li>
                             </ul>
                             <div class="check-box">
                                 <input type="checkbox" name="remember-password" id="type-1"> 
@@ -203,7 +93,7 @@
                             </div>
                             <!-- Buttons Box -->
                             <div class="buttons-box">
-                                <a href="contact.html" class="theme-btn proceed-btn">
+                                <a href="{% url 'checkout' %}" class="theme-btn proceed-btn" type="submit">
                                     Procced To Cheackout
                                 </a>
                             </div>

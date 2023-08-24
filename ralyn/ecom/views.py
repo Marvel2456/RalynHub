@@ -4,7 +4,7 @@ from . models import *
 
 def Index(request):
     number_of_products = 10
-    products = Item.objects.all()[:number_of_products]
+    products = Product.objects.all()[:number_of_products]
 
     context = {
         'products':products,
@@ -15,22 +15,37 @@ def About(request):
     return render(request, 'ecom/about.html')
 
 def Products(request):
-    return render(request, 'ecom/products.html')
+    product = Product.objects.all()
+    context = {'product':product}
+    return render(request, 'ecom/products.html', context)
 
 def Cart(request):
     if request.user.is_authenticated:
         customer = request.user
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        order, created = Order.objects.get_or_create(user=customer, completed=False)
         items = order.orderitem_set.all()
     else:
         items = []
+        order = {'get_cart_total':0, 'get_cart_items':0}
     context = {
-        'items':items
+        'items':items,
+        'order':order
     }
     return render(request, 'ecom/cart.html', context)
 
 def Checkout(request):
-    pass
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(user=customer, completed=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items':0}
+    context = {
+        'items':items,
+        'order':order
+    }
+    return render(request, 'ecom/checkout.html', context)
 
 def Contact(request):
     return render(request, 'ecom/contact.html')

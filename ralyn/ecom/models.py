@@ -16,7 +16,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Item(models.Model):
+class Product(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     name = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='item/image', blank=True, null=True)
@@ -46,16 +46,35 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.email
+    
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+    
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+    
+#  should look for a way to add shipping cost dynamically or manually and update the grand total with shipping included
 
 class OrderItem(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=0, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.item.name
+        return self.product.name
+    
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
 
 # Add is popular boolean field to the product to create a list of all the popular products
 
