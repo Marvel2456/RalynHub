@@ -45,6 +45,9 @@
                                 {% else %}
                                 <li class=""><a href="{% url 'account_login' %}">Login</a></li>
                                 {% endif %}
+                                <li class=""><a href="{% url 'cart' %}">Cart
+                                    <i class="bi bi-basket2" style="color:red;">{{cart_items}}</i>
+                                </a></li>
                             </ul>
                         </div>
                         
@@ -75,17 +78,6 @@
                         
                     </div>
                     
-                    <!-- Cart Box -->
-                    <div class="cart-box">
-                        <div class="box-inner">
-                            <a href="{% url 'cart' %}" class="icon-box">
-                                <span class="icon flaticon-bag"></span>
-                                <i class="total-cart">0</i>
-                            </a>
-                            Phone<br>
-                            <a class="phone" href="tel:88-1900-6789-56">88 1900 6789 56</a>
-                        </div>
-                    </div>
                     <!-- End Cart Box -->
                     
                     <!-- Mobile Navigation Toggler -->
@@ -132,6 +124,7 @@
         <div class="close-btn"><span class="icon flaticon-multiply"></span></div>
         <nav class="menu-box">
             <div class="nav-logo"><a href="index.html"><img src="images/mobile-logo.png" alt="" title=""></a></div>
+            
             <!-- Search -->
             <div class="search-box">
                 <form method="post" action="contact.html">
@@ -141,8 +134,10 @@
                     </div>
                 </form>
             </div>
+            
             <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
         </nav>
+        
     </div>
     <!-- End Mobile Menu -->
 

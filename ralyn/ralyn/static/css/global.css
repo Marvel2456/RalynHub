@@ -60,8 +60,8 @@
 :root {
 	
 	/* #ED1D24 in decimal RGB */
-  --main-color: rgb(237,29,36);
-  --main-color-rgb:237,29,36;
+  --main-color: #f47c64;
+  --main-color:#f47c64;
   
   /* #828A8D in decimal RGB */
   --color-two: rgb(130,138,141);

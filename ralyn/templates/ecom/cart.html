@@ -58,7 +58,9 @@
                                         <!-- Quantity Box -->
                                         <td class="quantity-box">
                                             <div class="item-quantity">
-                                                <input class="qty-spinner" type="text" value="1" name="quantity">
+                                                <a><i class="bi bi-dash-lg update-cart" data-product={{item.product.id}} data-action="remove"></i></a>
+                                                <input class="quantity" type="text"  value="{{item.quantity}}" name="quantity">
+                                                 <a><i class="bi bi-plus-lg update-cart" data-product={{item.product.id}} data-action="add"></i></a>
                                             </div>
                                         </td>
                                         <td class="sub-total">${{item.get_total}}</td>

@@ -225,11 +225,11 @@
 	
 	
 	 //Jquery Spinner / Quantity Spinner
-	if($('.qty-spinner').length){
-		$("input.qty-spinner").TouchSpin({
-		  verticalbuttons: true
-		});
-	}
+	// if($('.qty-spinner').length){
+	// 	$("input.qty-spinner").TouchSpin({
+	// 	  verticalbuttons: true
+	// 	});
+	// }
 	
 	
 	

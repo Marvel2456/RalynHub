@@ -48,6 +48,15 @@ class Order(models.Model):
         return self.user.email
     
     @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for items in orderitems:
+            if items in orderitems:
+                shipping = True
+        return shipping
+    
+    @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
