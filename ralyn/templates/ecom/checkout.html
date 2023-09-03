@@ -27,8 +27,8 @@
                 <div class="inner-column">
                     <h4>Delivery Information</h4>
                     <!-- Shipping Form -->
-                    <div class="shipping-form">
-                        <form method="post" action="contact.html">
+                    <div class="shipping-form" id="ship">
+                        <form method="post" action="contact.html" id="form">
                             <div class="row clearfix">
                                 
                                 <div class="col-lg-6 col-md-6 col-sm-12 form-group">
@@ -66,7 +66,7 @@
                                 
                                 <div class="col-lg-12 col-md-12 col-sm-12 form-group">
                                     <div class="buttons-box">
-                                        <button class="theme-btn btn-style-one">
+                                        <button class="theme-btn btn-style-one" id="form-button">
                                             Procced To Cheakout
                                         </button>
                                     </div>
@@ -89,7 +89,7 @@
                         <ul class="order-totals">
                             <li>Total Quantity<span>{{order.get_cart_items}}</span></li>
                             <li>Total<span>${{order.get_cart_total}}</span></li>
-                            <li>Shipping Fee<span>$34.00</span></li>
+                            {% comment %} <li>Shipping Fee<span>$34.00</span></li> {% endcomment %}
                         </ul>
                         
                         <!-- Voucher Box -->
@@ -104,10 +104,10 @@
                         
                         <!-- Order Total -->
                         {% comment %} add delivery fee as well {% endcomment %}
-                        <div class="order-total">Total <span>$345.00</span></div>
+                        <div class="order-total">Total <span>${{order.get_cart_total}}</span></div>
                         
                         <div class="button-box">
-                            <button class="theme-btn pay-btn">Procced to pay</button>
+                            <button class="theme-btn pay-btn hidden" id="payment">Procced to pay</button>
                         </div>
                         
                     </div>
@@ -119,73 +119,21 @@
 </section>
 <!-- End Checkout Section -->
 
-<!-- Gallery Section -->
-<section class="gallery-section">
-    <div class="outer-container">
-        <div class="instagram-carousel owl-carousel owl-theme">
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/1.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/2.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/3.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/3.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/4.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/4.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/5.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/5.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/6.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/6.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
+
+<script type="text/javascript">
+    var shipping = '{{order.shipping}}'
+
+    if (shipping == 'False'){
+        document.getElementById('ship').innerHTML = ''
+    }
+
+    var form = document.getElementById('form')
+    form.addEventListener('submit', function(e){
+        e.preventDefault()
+        console.log('Submitted');
+        document.getElementById('form-button').classList.add("hidden");
+        document.getElementById('payment').classList.remove("hidden");
+    })
+</script>
 <!-- End Gallery Section -->
 {% endblock content %}
