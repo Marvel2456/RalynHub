@@ -15,7 +15,7 @@ def loginView(request):
             login(request, user)
            
             messages.success(request, f'Welcome {user.email}')
-            return redirect('index')
+            return redirect('dashboard')
         
         else:
             messages.info(request, 'Email or Password is not correct')
@@ -27,16 +27,24 @@ def logoutView(request):
     return redirect('login')
 
 def Dashboard(request):
-    pass
+    return render(request, 'erm/dashboard.html')
 
 def Categories(request):
-    pass
 
-def CategoryDetail(request):
-    pass
+    return render(request, 'erm/category.html')
 
-def Products(request):
-    pass
+def addCategory(request):
+    return render(request, 'erm/category.html')
+
+
+def addProduct(request):
+    return render(request, 'erm/add_product.html')
+
+def ProductList(request):
+    return render(request, 'erm/product_list.html')
+
+def ProductGrid(request):
+    return render(request, 'erm/product_grid.html')
 
 def ProductDetail(request, pk):
     pass

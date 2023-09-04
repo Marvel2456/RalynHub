@@ -19,7 +19,11 @@ class Category(models.Model):
 class Product(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     name = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField(upload_to='item/image', blank=True, null=True)
+    main_image = models.ImageField(upload_to='item/image', blank=True, null=True)
+    image1 = models.ImageField(upload_to='item/image', blank=True, null=True)
+    image2 = models.ImageField(upload_to='item/image', blank=True, null=True)
+    image3 = models.ImageField(upload_to='item/image', blank=True, null=True)
+    image4 = models.ImageField(upload_to='item/image', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     store_quantity = models.PositiveIntegerField(blank=True, null=True)
@@ -32,7 +36,35 @@ class Product(models.Model):
     @property
     def imageURL(self):
         try:
-            url = self.image.url
+            url = self.main_image.url
+        except:
+            url = ''
+        return url
+    @property
+    def image1URL(self):
+        try:
+            url = self.image1.url
+        except:
+            url = ''
+        return url
+    @property
+    def image2URL(self):
+        try:
+            url = self.image2.url
+        except:
+            url = ''
+        return url
+    @property
+    def image3URL(self):
+        try:
+            url = self.image3.url
+        except:
+            url = ''
+        return url
+    @property
+    def imag4eURL(self):
+        try:
+            url = self.image4.url
         except:
             url = ''
         return url
