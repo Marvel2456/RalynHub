@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock title %}
+
+{% block content %}
+<!-- Page Title -->
+<section class="page-title">
+    <div class="auto-container">
+        <h2>Login Page</h2>
+        <ul class="bread-crumb clearfix">
+            <li><a href="index.html">Home</a></li>
+            <li>Pages</li>
+            <li>Login</li>
+        </ul>
+    </div>
+</section>
+<!-- End Page Title -->
+
+<!-- Register Section -->
+<div class="register-section">
+    <div class="auto-container">
+        <div class="inner-container">
+            <div class="row clearfix">
+                <div class="column col-lg-3 col-md-12 col-sm-12">
+                    
+                </div>
+                <!-- Column -->
+                <div class="column col-lg-6 col-md-12 col-sm-12">
+                    <!-- Login Form -->
+                    <div class="styled-form">
+                        <h4>Sign Up</h4>
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" name="email" value="" placeholder="Email Adress" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" value="" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="theme-btn btn-style-one">
+                                    Log In
+                                </button>
+                                <small>Do not have an account, <a href="{% url 'register' %}">Sign up</a></small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="column col-lg-3 col-md-12 col-sm-12">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Register Section -->
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+    <div class="outer-container">
+        <div class="instagram-carousel owl-carousel owl-theme">
+            
+            <!-- Insta Gallery -->
+            <div class="insta-gallery">
+                <img src="images/gallery/1.jpg" alt="" />
+                <div class="overlay-box">
+                    <div class="overlay-inner">
+                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insta Gallery -->
+            <div class="insta-gallery">
+                <img src="images/gallery/2.jpg" alt="" />
+                <div class="overlay-box">
+                    <div class="overlay-inner">
+                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insta Gallery -->
+            <div class="insta-gallery">
+                <img src="images/gallery/3.jpg" alt="" />
+                <div class="overlay-box">
+                    <div class="overlay-inner">
+                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/3.jpg"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insta Gallery -->
+            <div class="insta-gallery">
+                <img src="images/gallery/4.jpg" alt="" />
+                <div class="overlay-box">
+                    <div class="overlay-inner">
+                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/4.jpg"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insta Gallery -->
+            <div class="insta-gallery">
+                <img src="images/gallery/5.jpg" alt="" />
+                <div class="overlay-box">
+                    <div class="overlay-inner">
+                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/5.jpg"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insta Gallery -->
+            <div class="insta-gallery">
+                <img src="images/gallery/6.jpg" alt="" />
+                <div class="overlay-box">
+                    <div class="overlay-inner">
+                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/6.jpg"></a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<!-- End Gallery Section -->
+{% endblock content %}

@@ -159,6 +159,16 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 # ACCOUNT_USERNAME_REQUIRED = False
 
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'bombardandy@gmail.com'
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'bombardandy@gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_PASSWORD = 'aepoevolvwtihlvc'
+
+PASSWORD_RESET_TIMEOUT = 21600
+
+
 LOGIN_REDIRECT_URL = 'index'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
