@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from ecom.models import Category, Product, Order, OrderItem, ShippingDetail
+from erm.forms import *
 # Create your views here.
 
 
@@ -30,15 +31,35 @@ def Dashboard(request):
     return render(request, 'erm/dashboard.html')
 
 def Categories(request):
-
-    return render(request, 'erm/category.html')
+    category = Category.objects.all()
+    form = CreateCategoryForm()
+    if request.method == 'POST':
+        form = CreateCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('category')
+        
+    context = {
+        'category':category,
+        'form':form
+    }
+    return render(request, 'erm/category.html', context)
 
 def addCategory(request):
     return render(request, 'erm/category.html')
 
 
 def addProduct(request):
-    return render(request, 'erm/add_product.html')
+    form = CreateProductForm()
+    if request.method == 'POST':
+        form = CreateProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')
+    context = {
+        'form':form
+    }
+    return render(request, 'erm/add_product.html', context)
 
 def ProductList(request):
     return render(request, 'erm/product_list.html')

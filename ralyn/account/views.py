@@ -55,3 +55,20 @@ def LoginView(request):
 def LogoutView(request):
     logout(request)
     return redirect('login')
+
+
+def CustomerProfile(request):
+    customer = request.user.customer
+    form = EditProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profie successfully updated')
+            return redirect('edit_profile')
+    context = {
+        'customer':customer,
+        'form':form
+    }
+    
+    return render(request, 'accounts/edit_profile.html', context)

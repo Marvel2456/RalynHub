@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from . models import *
 from django.http import JsonResponse
 import json
+from account.models import Customer
+from .forms import UpdateCustomerForm
+from django.contrib import messages
 # Create your views here.
 
 def Index(request):
@@ -117,3 +120,18 @@ def Checkout(request):
 
 def Contact(request):
     return render(request, 'ecom/contact.html')
+
+def Profile(request):
+    customer = request.user.customer
+    form = UpdateCustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = UpdateCustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profie successfully updated')
+            return redirect('profile')
+    context = {
+        'customer':customer,
+        'form':form
+    }
+    return render(request, 'ecom/profile', context)
