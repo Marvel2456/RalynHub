@@ -62,7 +62,7 @@ def Products(request):
 
 def Cart(request):
     if request.user.is_authenticated:
-        customer = request.user
+        customer = request.user.customer
         order, created = Order.objects.get_or_create(user=customer, completed=False)
         items = order.orderitem_set.all()
         cart_items = order.get_cart_items
@@ -84,7 +84,7 @@ def UpdateItems(request):
     print(productId)
     print(action)
 
-    customer = request.user
+    customer = request.user.customer
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(user=customer, completed=False)
 
