@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row py-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card border-0">
+            <div class="card-body">
+                <div class="card-title py-3" style="text-align: center;">
+                    <h4 class="py-3">Change your password</h4>
+                </div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <br>
+                    <input type="submit" name="Change Password" value="Change Password" class="btn btn-primary">
+                </form>
+            
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder='Enter new password';
+    form_fields[2].placeholder='Confirm password';
+    
+
+    for (var field in form_fields){
+        form_fields[field].className += ' form-control'
+    }
+</script>
+{% endblock content %}

@@ -159,6 +159,10 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 # ACCOUNT_USERNAME_REQUIRED = False
 
+
+PASSWORD_RESET_TIMEOUT = 21600
+
+
 LOGIN_REDIRECT_URL = 'index'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
