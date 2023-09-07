@@ -4,5 +4,53 @@
 {% block title %} Users Account {% endblock title %}
 
 {% block content %}
+<!-- CONTENT WRAPPER -->
+<div class="ec-content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper breadcrumb-contacts">
+            <div>
+                <h1>User List</h1>
+                <p class="breadcrumbs"><span><a href="{% url 'dashboard' %}">Home</a></span>
+                    <span><i class="mdi mdi-chevron-right"></i></span>User
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="ec-vendor-list card card-default">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="responsive-data-table" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Username</th>
+                                        <th>Phone</th>
+                                        <th>Total Buy</th>
+                                        <th>Join On</th> 
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for customer in customer %}
+                                    <tr>
+                                        <td>{{customer.name}}</td>
+                                        <td>{{customer.email}}</td>
+                                        <td>{{customer.username}}</td>
+                                        <td>{{customer.phone_number}}</td>
+                                        <td>ACTIVE</td>
+                                        <td>{{ customer.user.date_joined|date:"Y-m-d" }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
 
 {% endblock content %}

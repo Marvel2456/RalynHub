@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- CONTENT WRAPPER -->
-<div class="ec-content-wrapper mt-5">
+<div class="ec-content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper breadcrumb-wrapper-2 breadcrumb-contacts">
                 <h1>Main Category</h1>
@@ -49,22 +49,14 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Product</th>
-                                        <th>Total Sell</th>
-                                        <th>Status</th>
-                                        <th>Trending</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    {% for category in category %}
                                     <tr>
-                                        <td>Clothes</td>
-                                        
-                                        <td>28</td>
-                                        <td>2161</td>
-                                        <td>ACTIVE</td>
-                                        <td><span class="badge badge-success">Top</span></td>
+                                        <td>{{category.name}}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button"
@@ -77,14 +69,15 @@
                                                 </button>
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{category.id}}">Edit</a>
+                                                    <a class="dropdown-item" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal{{category.id}}">Delete</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    
-                                    
+                                    {% include 'erm/edit_category.html' %}
+                                    {% include 'erm/delete_category.html' %}
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

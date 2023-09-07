@@ -8,7 +8,10 @@ urlpatterns = [
    path('product_grid/', views.ProductGrid, name='product_grid'),
    path('add_product/', views.addProduct, name='add_product'),
    path('product_detail/', views.ProductDetail, name='product_detail'),
-   path('category/', views.Categories, name='category'),
-   path('add_category', views.addCategory, name='add_category'),
-   
+   path('category/', views.Categories, name='category'),  
+   path('user/', views.Customers, name='user'),
+   path('edit_product/<str:uuid>/', views.UpdateProduct, name='edit_product'),
+   path('delete_product/', views.deleteProduct, name='delete_product'),
+   path('edit_category/', views.EditCategory, name='edit_category'),
+   path('delete_category/', views.deleteCategory, name='delete_category'),
 ]

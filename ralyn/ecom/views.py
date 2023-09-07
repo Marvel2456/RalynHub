@@ -10,8 +10,8 @@ from django.contrib import messages
 def Index(request):
 
     if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(user=customer, completed=False)
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
         cart_items = order.get_cart_items
     else:
@@ -30,8 +30,8 @@ def Index(request):
 def About(request):
 
     if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(user=customer, completed=False)
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
         cart_items = order.get_cart_items
     else:
@@ -47,8 +47,8 @@ def About(request):
 def Products(request):
 
     if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(user=customer, completed=False)
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
         cart_items = order.get_cart_items
     else:
@@ -66,7 +66,7 @@ def Products(request):
 def Cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
-        order, created = Order.objects.get_or_create(user=customer, completed=False)
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
         cart_items = order.get_cart_items
     else:
@@ -89,7 +89,7 @@ def UpdateItems(request):
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
-    order, created = Order.objects.get_or_create(user=customer, completed=False)
+    order, created = Order.objects.get_or_create(customer=customer, completed=False)
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
@@ -106,8 +106,8 @@ def UpdateItems(request):
 
 def Checkout(request):
     if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(user=customer, completed=False)
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
     else:
         items = []
@@ -134,4 +134,4 @@ def Profile(request):
         'customer':customer,
         'form':form
     }
-    return render(request, 'ecom/profile', context)
+    return render(request, 'ecom/profile.html', context)
