@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
-from account.models import User
+from account.models import User, Customer
 
 # Create your models here.
 
@@ -61,7 +61,7 @@ class Product(models.Model):
             url = ''
         return url
     @property
-    def imag4eURL(self):
+    def image4URL(self):
         try:
             url = self.image4.url
         except:
@@ -70,7 +70,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     Ordered_at = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False, blank=True, null=True)
     transaction_id = models.CharField(max_length=100, null=True)

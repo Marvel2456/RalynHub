@@ -85,6 +85,7 @@
     <!-- Preloader End -->
     {% include 'partials/_navbar.html' %}
     {% include 'partials/_sidebar.html' %}
+    {% include 'partials/_message.html' %}
     {% block content %}
     
     {% endblock %}
@@ -105,6 +106,13 @@
 
     <!-- Scroll To Top -->
     <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-up"></span></div>
+    <script>
+        setTimeout(function(){
+            if ($('#msg').length > 0 ){
+                $('#msg').remove();
+            }
+        }, 4000)
+    </script>
 
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>

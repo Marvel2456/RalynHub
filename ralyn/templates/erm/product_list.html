@@ -12,7 +12,7 @@
                     <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
             </div>
             <div>
-                <a href="product-list.html" class="btn btn-primary"> Add Porduct</a>
+                <a href="{% url 'add_product' %}" class="btn btn-primary"> Add Porduct</a>
             </div>
         </div>
         <div class="row">
@@ -26,26 +26,21 @@
                                     <tr>
                                         <th>Product</th>
                                         <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Offer</th>
-                                        <th>Purchased</th>
+                                        <th>Category</th>
                                         <th>Stock</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
+                                        <th>Price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    {% for product in product %}
                                     <tr>
-                                        <td><img class="tbl-thumb" src="assets/img/products/p1.jpg" alt="Product Image" /></td>
-                                        <td>Baby shoes</td>
-                                        <td>$20</td>
-                                        <td>25% OFF</td>
-                                        <td>61</td>
-                                        <td>5421</td>
-                                        <td>ACTIVE</td>
-                                        <td>2021-10-30</td>
+                                        <td><img class="tbl-thumb" src="{{product.imageURL}}" alt="Product Image" /></td>
+                                        <td>{{product.name}}</td>
+                                        <td>{{product.category}}</td>
+                                        <td>{{product.store_quantity}}</td>
+                                        <td>{{product.price}}</td>
                                         <td>
                                             <div class="btn-group mb-1">
                                                 <button type="button"
@@ -58,12 +53,14 @@
                                                 </button>
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="{% url 'edit_product' product.id %}">Edit</a>
+                                                    <a class="dropdown-item" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#deleteProductModal{{product.id}}">Delete</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    {% include 'erm/delete_product.html' %}
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

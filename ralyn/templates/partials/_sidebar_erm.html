@@ -4,8 +4,8 @@
     <div id="sidebar" class="sidebar ec-sidebar-footer">
 
         <div class="ec-brand">
-            <a href="index.html" title="Ekka">
-                <img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" />
+            <a href="{% url 'dashboard' %}" title="Ekka">
+                {% comment %} <img class="ec-brand-icon" src="assets/img/logo/ec-site-logo.png" alt="" /> {% endcomment %}
                 <span class="ec-brand-name text-truncate">Ralyn</span>
             </a>
         </div>
@@ -59,20 +59,9 @@
                     </a>
                     <div class="collapse">
                         <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
-                            <li>
-                                <a class="sidenav-item-link" href="user-card.html">
-                                    <span class="nav-text">User Grid</span>
-                                </a>
-                            </li>
-
                             <li class="">
-                                <a class="sidenav-item-link" href="user-list.html">
+                                <a class="sidenav-item-link" href="{% url 'user' %}">
                                     <span class="nav-text">User List</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="user-profile.html">
-                                    <span class="nav-text">Users Profile</span>
                                 </a>
                             </li>
                         </ul>
