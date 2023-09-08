@@ -1,8 +1,290 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}  {% endblock title %}
+{% block title %} Product Detail {% endblock title %}
 
 {% block content %}
+<!-- Page Title -->
+<section class="page-title">
+    <div class="auto-container">
+        <h2>Product Detail</h2>
+        <ul class="bread-crumb clearfix">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li>Pages</li>
+            <li>Product Details</li>
+        </ul>
+    </div>
+</section>
+<!-- End Page Title -->
+
+<!-- Shop Detail Section -->
+<section class="shop-detail-section">
+    <div class="auto-container">
+        <!-- Upper Box -->
+        <div class="upper-box">
+            <div class="row clearfix">
+                <!-- Gallery Column -->
+                <div class="gallery-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="carousel-outer">
+                            <!-- Swiper -->
+                            <div class="swiper-container content-carousel">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <figure class="image"><a href="" class="lightbox-image"><img src="{{product.imageURL}}" alt=""></a></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="image"><a href="" class="lightbox-image"><img src="{{product.image1URL}}" alt=""></a></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="image"><a href="" class="lightbox-image"><img src="{{product.image2URL}}" alt=""></a></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="image"><a href="" class="lightbox-image"><img src="{{product.image3URL}}" alt=""></a></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="image"><a href="" class="lightbox-image"><img src="{{product.image4URL}}" alt=""></a></figure>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-container thumbs-carousel">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <figure class="thumb"><img src="images/resource/products/36.png" alt=""></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="thumb"><img src="images/resource/products/37.png" alt=""></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="thumb"><img src="images/resource/products/38.png" alt=""></figure>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <figure class="thumb"><img src="images/resource/products/39.png" alt=""></figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content Column -->
+                <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <h3>Accesories Lather Shoes</h3>
+                        <!-- Rating -->
+                        <div class="rating">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="light fa fa-star"></span>
+                            <i>(4 customer review)</i>
+                        </div>
+                        <!-- Price -->
+                        <div class="price">$16.00 <span>$32.00</span> <i>-34%</i></div>
+                        <div class="text">Rorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</div>
+                        <div class="d-flex flex-wrap">
+                            <!-- Model -->
+                            <div class="model">
+                                <span class="model-title">Model :</span>
+                            </div>
+                            <!-- Select Size -->
+                            <div class="select-size-box clearfix">
+                                <div class="select-box"><input type="radio" name="payment-group" id="radio-one" checked><label for="radio-one">tyk</label></div>
+                                <div class="select-box"><input type="radio" name="payment-group" id="radio-two"><label for="radio-two">ffd2</label></div>
+                                <div class="select-box"><input type="radio" name="payment-group" id="radio-three"><label for="radio-three">23tt</label></div>
+                                <div class="select-box"><input type="radio" name="payment-group" id="radio-four"><label for="radio-four">r454</label></div>
+                                <div class="select-box"><input type="radio" name="payment-group" id="radio-five"><label for="radio-five">45hy</label></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Categories -->
+                        <div class="categories"><span>Categories :</span> All, Featured, Medical, Covid-19 Mask</div>
+                        
+                        <!-- Tags -->
+                        <div class="categories"><span>Tags :</span> Black, Brown, Red, Shoes, £0.00 - £150.00</div>
+                        
+                        <!-- Social Box -->
+                        <ul class="social-box">
+                            <li class="share">Share:</li>
+                            <li><a href="https://www.facebook.com/" class="fa fa-facebook-f"></a></li>
+                            <li><a href="https://www.twitter.com/" class="fa fa-twitter"></a></li>
+                            <li><a href="https://dribbble.com/" class="fa fa-dribbble"></a></li>
+                            <li><a href="https://www.linkedin.com/" class="fa fa-linkedin"></a></li>
+                        </ul>
+                        
+                        <div class="d-flex align-items-center flex-wrap">
+                        
+                            <!-- Button Box -->
+                            <div class="button-box">
+                                <a href="shop.html" class="theme-btn btn-style-one">
+                                    Add to cart
+                                </a>
+                            </div>
+                            
+                            <!-- Quantity Box -->
+                            <div class="quantity-box">
+                                <div class="item-quantity">
+                                    <input class="qty-spinner" type="text" value="1" name="quantity">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Upper Box -->
+        
+        <!-- Lower Box -->
+        <div class="lower-box">
+            
+            <!-- Product Info Tabs -->
+            <div class="product-info-tabs">
+                <!-- Product Tabs -->
+                <div class="prod-tabs tabs-box">
+                
+                    <!-- Tab Btns -->
+                    <ul class="tab-btns tab-buttons clearfix">
+                        <li data-tab="#prod-details" class="tab-btn active-btn">Product Details</li>
+                        <li data-tab="#prod-info" class="tab-btn">additional information</li>
+                        <li data-tab="#prod-review" class="tab-btn">Review (02)</li>
+                        <li data-tab="#prod-faq" class="tab-btn">Faq</li>
+                    </ul>
+                    
+                    <!-- Tabs Container -->
+                    <div class="tabs-content">
+                        
+                        <!-- Tab / Active Tab -->
+                        <div class="tab active-tab" id="prod-details">
+                            <div class="content">
+                                <h3>Experience is over the world visit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rhoncus, dolor eget viverra pretium, dolor tellus aliquet nunc vitae ultricies erat elit eu lacus. Vestibulum non justo consectetur, cursus ante, tincidunt sapien. Nulla quis diam sit amet turpis interdum accumsan quis nec enim. Vivamus faucibus ex sed nibh egestas elementum. Mauris et bibendum dui. Aenean consequat pulvinar luctus</p>
+                                <h5>More Details</h5>
+                                <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <ul class="list-one">
+                                            <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                                            <li>Lorem Ipsum has been the ‘s standard dummy text. Lorem Ipsumum is simply dummy text.</li>
+                                            <li>type here your detail one by one li more add</li>
+                                            <li>has been the industry’s standard dummy text ever since. Lorem Ips</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <ul class="list-two">
+                                            <li>Lorem Ipsum generators on the tend to repeat.</li>
+                                            <li>If you are going to use a passage.</li>
+                                            <li>Lorem Ipsum generators on the tend to repeat.</li>
+                                            <li>Lorem Ipsum generators on the tend to repeat.</li>
+                                            <li>If you are going to use a passage.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tab -->
+                        <div class="tab" id="prod-info">
+                            <div class="content">
+                                <h3>Experience is over the world visit</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rhoncus, dolor eget viverra pretium, dolor tellus aliquet nunc vitae ultricies erat elit eu lacus. Vestibulum non justo consectetur, cursus ante, tincidunt sapien. Nulla quis diam sit amet turpis interdum accumsan quis nec enim. Vivamus faucibus ex sed nibh egestas elementum. Mauris et bibendum dui. Aenean consequat pulvinar luctus</p>
+                            </div>
+                        </div>
+                        
+                        <!--Tab-->
+                        <div class="tab" id="prod-review">
+                            <h2 class="title">2 Reviews For win Your Friends</h2>
+                            <!--Reviews Container-->
+                            <div class="comments-area">
+                                <!--Comment Box-->
+                                <div class="comment-box">
+                                    <div class="comment">
+                                        <div class="author-thumb"><img src="images/resource/author-1.jpg" alt=""></div>
+                                        <div class="comment-inner">
+                                            <div class="comment-info clearfix">Steven Rich – March 17, 2022:</div>
+                                            <div class="rating">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star light"></span>
+                                            </div>
+                                            <div class="text">How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Comment Box-->
+                                
+                                <div class="comment-box reply-comment">
+                                    <div class="comment">
+                                        <div class="comment-inner">
+                                            <div class="comment-info clearfix">{{review.customer}} – {{review.created_at}}:</div>
+                                            <div class="rating">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star-half-empty"></span>
+                                            </div>
+                                            <div class="text">There anyone who loves or pursues or desires to obtain pain itself, because it is pain sed, because occasionally circumstances occur some great pleasure.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            
+                            <!-- Comment Form -->
+                            <div class="shop-comment-form">	
+                                <h4>Add Your Comments</h4>
+                                <form method="post" action="contact.html">
+                                    <div class="row clearfix">
+                                       
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                            <label>Your Comments*</label>
+                                            <textarea name="message" placeholder=""></textarea>
+                                        </div>
+                                        
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">												
+                                            <button class="theme-btn btn-style-one">
+                                                Submit now
+                                            </button>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </form>
+                                    
+                            </div>
+                            
+                        </div>
+                         
+                    </div>
+                </div>
+                
+            </div>
+            <!--End Product Info Tabs-->
+            
+        </div>
+        <!-- End Lower Box -->
+        
+    </div>
+</section>
+<!-- End Shop Page Section -->
+
+<!-- Products Section Six -->
+<section class="products-section-six">
+    <div class="auto-container">
+        <!-- Sec Title -->
+        <div class="sec-title">
+            <h4><span>Populer</span> Products For You !</h4>
+        </div>
+        <div class="row clearfix">
+            
+            
+        </div>
+    </div>
+</section>
+<!-- End Products Section Six -->
+
 
 {% endblock content %}

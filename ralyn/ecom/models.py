@@ -71,7 +71,7 @@ class Product(models.Model):
 class Order(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    Ordered_at = models.DateTimeField(auto_now_add=True)
+    ordered_at = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False, blank=True, null=True)
     transaction_id = models.CharField(max_length=100, null=True)
 
@@ -140,4 +140,14 @@ class Remark(models.Model):
     def __str__(self):
         return self.client_name
     
+
+class Review(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.customer.username
 

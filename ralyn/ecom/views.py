@@ -3,7 +3,7 @@ from . models import *
 from django.http import JsonResponse
 import json
 from account.models import Customer
-from .forms import UpdateCustomerForm
+from .forms import UpdateCustomerForm, CreateReviewForm
 from django.contrib import messages
 # Create your views here.
 
@@ -135,3 +135,23 @@ def Profile(request):
         'form':form
     }
     return render(request, 'ecom/profile.html', context)
+
+
+def productDetail(request, uuid):
+    product = Product.objects.get(id=uuid)
+    
+    form = CreateReviewForm()
+    if request.method == 'POST':
+        form = CreateReviewForm(request.POST or None)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.customer = request.user.customer
+            review.product = product
+            review.save()
+            messages.success(request, 'review successfully submited')
+            return redirect('detail')
+    context = {
+        'product':product,
+        'form':form
+    }
+    return render(request, 'ecom/detail.html', context)

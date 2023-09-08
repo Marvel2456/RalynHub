@@ -34,6 +34,7 @@ def Categories(request):
         form = CreateCategoryForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'category successfully created')
             return redirect('category')
         
     context = {
@@ -66,6 +67,7 @@ def addProduct(request):
         form = CreateProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'product successfully created')
             return redirect('product_list')
     context = {
         'form':form
