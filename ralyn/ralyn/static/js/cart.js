@@ -34,6 +34,39 @@ function updateUserOrder(productId, action){
 
     .then((data) =>{
         console.log('data:',data)
+        document.getElementById('addCart').innerHTML = `${data.qty}`
+    })
+}
+
+let inputfields = document.getElementsByTagName('input')
+for(i = 0; i < inputfields.length; i++){
+    inputfields[i].addEventListener('change', updateQuantity)   
+        
+}
+
+function updateQuantity(e){
+    let inputvalue = e.target.value
+    let productId = e.target.dataset.product
+
+    const data = {prod_id: productId, val: inputvalue};
+    let url = '/update_quantity/'
+
+    fetch(url, {
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify(data)
+    })
+    .then(res => res.json())
+
+    .then((data) =>{
+        console.log('Success:', data);
+        document.getElementById('sub_total').innerHTML = `${data.sub_total.toFixed(1)}`
+        document.getElementById('final_total').innerHTML = `${data.final_total.toFixed(1)}`
+        // document.getElementById('sum_quantity').innerHTML = `${data.total_quantity}`
+        // document.getElementById('addCart').innerHTML = `${data.total_quantity}`
         location.reload()
     })
 }

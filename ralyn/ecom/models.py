@@ -76,7 +76,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return self.user.email
+        return str(self.customer)
     
     @property
     def shipping(self):
@@ -119,7 +119,7 @@ class OrderItem(models.Model):
 # Add is popular boolean field to the product to create a list of all the popular products
 
 class ShippingDetail(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     address = models.CharField(max_length=225, blank=True, null=True)
     city = models.CharField(max_length=225, blank=True, null=True)

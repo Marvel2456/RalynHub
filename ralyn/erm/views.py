@@ -87,10 +87,6 @@ def ProductList(request):
     context = {'product':product}
     return render(request, 'erm/product_list.html', context)
 
-def ProductGrid(request):
-    product = Product.objects.all()
-    context = {'product':product}
-    return render(request, 'erm/product_grid.html', context)
 
 def ProductDetail(request, pk):
     pass

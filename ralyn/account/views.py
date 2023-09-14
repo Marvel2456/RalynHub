@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from account.models import User, Customer
-from account.forms import RegisterForm
+from account.forms import *
 from django.contrib.auth import authenticate, login, logout
 from .emails import *
 from django.utils.encoding import force_str
@@ -56,3 +56,18 @@ def LogoutView(request):
     logout(request)
     return redirect('login')
 
+
+def Profile(request):
+    customer = request.user.customer
+    form = UpdateCustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = UpdateCustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profie successfully updated')
+            return redirect('profile')
+    context = {
+        'customer':customer,
+        'form':form
+    }
+    return render(request, 'ecom/profile.html', context)

@@ -72,7 +72,7 @@
                                         <div class="price">${{product.price}}</div>
                                         <!-- Add to cart -->
                                         <div class="quantity-box">
-                                            <button class="theme-btn btn-style-one align-item-end update-cart" data-product={{product.id}} data-action="add">Add to cart</button>
+                                            {% comment %} <button class="theme-btn btn-style-one align-item-end update-cart" data-product={{product.id}} data-action="add">Add to cart</button> {% endcomment %}
                                         </div>
                                     </div>
                                 </div>
@@ -101,6 +101,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock content %}
