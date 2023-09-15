@@ -13,7 +13,7 @@
                     <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
             </div>
             <div>
-                <a href="{% url 'product_list' %}" class="btn btn-primary"> Add to cart
+                <a data-product={{product.id}} data-action="add" class="btn btn-primary update-cart"> Add to cart
                 </a>
             </div>
         </div>

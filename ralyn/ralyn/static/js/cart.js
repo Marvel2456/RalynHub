@@ -5,13 +5,39 @@ for (var i = 0; i < updateCart.length; i++){
         var productId = this.dataset.product
         var action = this.dataset.action
         console.log('productId:', productId, 'action:', action)
+
         console.log('User:', user)
-        if (user === 'Anonymous user'){
-            console.log("user is not logged in")
+        if(user === 'AnonymousUser'){
+            addCookieItem(productId, action)
         }else{
             updateUserOrder(productId, action)
         }
     })
+}
+
+function addCookieItem(productId, action){
+    console.log("Not logged in")
+
+    if(action == 'add'){
+        if(cart[productId] == undefined){
+            cart[productId] = {'quantity': 1}
+        }else{
+            cart[productId]['quantity'] += 1
+        }
+    }
+
+    if(action == 'remove'){
+        cart[productId]['quantity'] -= 1
+
+        if(cart[productId]['quantity'] <= 0){
+            console.log("Remove Item")
+            delete cart[productId]
+        }
+
+    }
+    console.log('Cart:', cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    
 }
 
 function updateUserOrder(productId, action){
@@ -34,7 +60,7 @@ function updateUserOrder(productId, action){
 
     .then((data) =>{
         console.log('data:',data)
-        document.getElementById('addCart').innerHTML = `${data.qty}`
+        document.getElementById('addCart').innerHTML = `${data.total_quantity}`
     })
 }
 
