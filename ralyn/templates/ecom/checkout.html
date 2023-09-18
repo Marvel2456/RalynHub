@@ -134,10 +134,6 @@
 <script type='text/javascript'>
     var shipping = '{{order.shipping}}'
     var total = '{{order.get_cart_total|floatformat:2}}'
-    
-    if (shipping == 'False'){
-        document.getElementById('shipping-info').innerHTML = ''
-    }
 
     if ( user != 'AnonymousUser'){
         document.getElementById('user-info').innerHTML = ''
@@ -204,46 +200,4 @@
     }
 
 </script>
-
-
-
-
-{% comment %} <script type="text/javascript">
-    console.log('processing payment')
-    let total_cart = '{{sale.get_cart_total}}'
-
-    
-
-    document.getElementById('pay').addEventListener('click', function(e){
-        submitPayment()
-    })
-
-
-    function submitPayment(){
-        console.log('paymrnt')
-        let paymentData = {
-            
-            'total_cart':total_cart
-        }
-
-        let url = "{% url 'completed' branch.id %}"
-        fetch(url, {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                'X-CSRFToken':csrftoken,
-            },
-            body:JSON.stringify({'payment':paymentData})
-
-        })
-        .then(res => res.json())
-        .then((data) =>{
-            console.log('Success', data)
-            window.location.href = "{% url 'reciept' sale.id %}"
-        })
-
-    }
-
-</script> {% endcomment %}
-
 {% endblock content %}

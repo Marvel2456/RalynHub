@@ -80,7 +80,7 @@ class Order(models.Model):
     
     @property
     def shipping(self):
-        shipping = False
+        shipping = True
         orderitems = self.orderitem_set.all()
         for items in orderitems:
             if items in orderitems:

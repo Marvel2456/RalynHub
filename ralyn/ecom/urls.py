@@ -13,4 +13,5 @@ urlpatterns = [
     path('process_order/', views.processOrder, name='process_order'),
     path('profile/', views.Profile, name='profile' ),
     path('detail/<str:uuid>/', views.productDetail, name='detail'),
+    path('get_categories/', views.get_categories, name='get_categories'),
 ]

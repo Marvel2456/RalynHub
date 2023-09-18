@@ -7,7 +7,12 @@ from account.models import Customer
 from .forms import UpdateCustomerForm, CreateReviewForm
 from django.contrib import messages
 from .utils import cookieCart
+from django.core.paginator import Paginator
 # Create your views here.
+
+def get_categories(request):
+    categories = Category.objects.all().values('id', 'name')
+    return JsonResponse(list(categories), safe=False)
 
 def Index(request):
  
@@ -17,16 +22,38 @@ def Index(request):
         items = order.orderitem_set.all()
         total_quantity = order.get_cart_items
     else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        total_quantity = order['get_cart_items']
+        cookieData = cookieCart(request)
+        order = cookieData['order']
+        items = cookieData['items']
+        total_quantity = cookieData['total_quantity']
+    
+    category = request.GET.get('category')
 
-    product = Product.objects.all()
+    if category is None:
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(category__name=category)
+
+    product_contains_query = request.GET.get('product')
+
+    if product_contains_query != '' and product_contains_query is not None:
+        products = products.filter(name__icontains=product_contains_query)
+
+    categories = Category.objects.all()
+
+    paginator = Paginator(products, 20)
+    page = request.GET.get('page')
+    product_page = paginator.get_page(page)
+    nums = "a" * product_page.paginator.num_pages
+    
     context = {
-        'product':product,
+        'products':products,
         'items':items,
         'order':order,
         'total_quantity':total_quantity,
+        'product_page':product_page,
+        'nums':nums,
+        'categories':categories,
     }
     return render(request, 'ecom/index.html', context)
 
@@ -178,12 +205,17 @@ def Checkout(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
+        total_quantity = order.get_cart_items
     else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+        cookieData = cookieCart(request)
+        order = cookieData['order']
+        items = cookieData['items']
+        total_quantity = cookieData['total_quantity']
+
     context = {
         'items':items,
-        'order':order
+        'order':order,
+        'total_quantity':total_quantity,
     }
     return render(request, 'ecom/checkout.html', context)
 
