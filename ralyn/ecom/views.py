@@ -41,7 +41,7 @@ def Index(request):
 
     categories = Category.objects.all()
 
-    paginator = Paginator(products, 20)
+    paginator = Paginator(products, 2)
     page = request.GET.get('page')
     product_page = paginator.get_page(page)
     nums = "a" * product_page.paginator.num_pages
@@ -246,8 +246,6 @@ def productDetail(request, uuid):
         items = order.orderitem_set.all()
         total_quantity = order.get_cart_items
 
-       
-
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
@@ -270,6 +268,16 @@ def productDetail(request, uuid):
         'total_quantity':total_quantity,
         'product':product,
         'form':form,
-        # 'qty': order.get_cart_items,
     }
     return render(request, 'ecom/detail.html', context)
+
+def orderHistory(request):
+    customer = request.user.customer
+    order = Order.objects.filter(customer=customer)
+    # order_count = order.count()
+    
+    context = {
+        'order':order,
+    }
+
+    return render(request, 'ecom/order_history.html', context)

@@ -11,7 +11,7 @@ urlpatterns = [
     path('update_item/', views.UpdateItems, name='update_item'),
     path('update_quantity/', views.updateQuantity, name='update_quantity'),
     path('process_order/', views.processOrder, name='process_order'),
-    path('profile/', views.Profile, name='profile' ),
     path('detail/<str:uuid>/', views.productDetail, name='detail'),
     path('get_categories/', views.get_categories, name='get_categories'),
+    path('order_history/', views.orderHistory, name='order_history'),
 ]

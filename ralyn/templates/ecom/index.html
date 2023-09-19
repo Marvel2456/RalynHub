@@ -58,12 +58,12 @@
                     <div class="card-body">
                         
                         <div class="row">
-                            {% for products in products %}
+                            {% for products in product_page %}
                             <div class="col-lg-3 col-md-4 col-sm-6" id="productList">
                                 <div class="card-wrapper">
                                     <div class="card-container">
                                         <div class="card-top">
-                                            <a data-product={{products.id}} data-action="add" class="btn update-cart"><img class="card-image" src="{{products.imageURL}}"
+                                            <a data-product={{products.id}} data-action="add" class="btn update-cart"><img class="card-image" style="height:250px; width:250px; object-fit:cover;" src="{{products.imageURL}}"
                                                 alt="" /></a>
                                         </div>
                                         <div class="card-bottom">
@@ -123,6 +123,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from account.models import User, Customer
+from ecom.models import Order, OrderItem
 from account.forms import *
 from django.contrib.auth import authenticate, login, logout
 from .emails import *
@@ -59,6 +60,10 @@ def LogoutView(request):
 
 def Profile(request):
     customer = request.user.customer
+    order_item = OrderItem.objects.filter(order__customer=customer)
+    order = Order.objects.filter(customer=customer)
+    total_items = sum([item.quantity for item in order_item]) 
+    order_count = order.count()
     form = UpdateCustomerForm(instance=customer)
     if request.method == 'POST':
         form = UpdateCustomerForm(request.POST, instance=customer)
@@ -68,6 +73,10 @@ def Profile(request):
             return redirect('profile')
     context = {
         'customer':customer,
-        'form':form
+        'form':form,
+        'order':order,
+        'order_count':order_count,
+        'total_items':total_items,
+
     }
-    return render(request, 'ecom/profile.html', context)
+    return render(request, 'account/profile.html', context)

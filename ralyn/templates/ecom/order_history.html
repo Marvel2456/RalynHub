@@ -1,0 +1,56 @@
+{% extends 'base_erm.html' %}
+
+{% block title %} Order History {% endblock title %}
+
+{% block content %}
+
+<!-- CONTENT WRAPPER -->
+<div class="ec-content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+            <h1>Orders History</h1>
+            <p class="breadcrumbs"><span><a href="{% url 'index' %}">Home</a></span>
+                <span><i class="mdi mdi-chevron-right"></i></span>History
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="responsive-data-table" class="table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Customer</th>
+                                        <th>Email</th>
+                                        <th>Items</th>
+                                        <th>Price</th>
+                                        <th>Payment</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for order in order %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{order.customer.name}}</td>
+                                        <td>{{order.customer.email}}</td>
+                                        <td>{{order.get_cart_items}}</td>
+                                        <td>${{order.get_cart_total}}</td>
+                                        <td>PAID</td>
+                                        <td>{{order.ordered_at}}</td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
+{% endblock content %}
