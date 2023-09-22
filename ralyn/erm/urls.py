@@ -13,4 +13,5 @@ urlpatterns = [
    path('delete_product/', views.deleteProduct, name='delete_product'),
    path('edit_category/', views.EditCategory, name='edit_category'),
    path('delete_category/', views.deleteCategory, name='delete_category'),
+   path('order/', views.Orders, name='order'),
 ]

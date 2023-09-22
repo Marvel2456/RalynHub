@@ -129,7 +129,7 @@ class ShippingDetail(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.address
+        return str(self.address)
 
     
 class Remark(models.Model):
@@ -150,4 +150,21 @@ class Review(models.Model):
 
     def __str__(self):
         return self.customer.username
+    
+
+class PaymentHistory(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False) 
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    paystack_charge_id = models.CharField(max_length=100, default='', blank=True)
+    paystack_access_code = models.CharField(max_length=100, default='', blank=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    amount = models.DecimalField(max_digits=20, decimal_places=3, blank=True, null=True)
+    paid = models.BooleanField(default=False, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'payment histories'
+
+    def __str__(self) -> str:
+        return f'{self.customer.email} - {self.order} - {self.amount} - {self.date}'
 

@@ -106,7 +106,12 @@ def UpdateProduct(request, uuid):
     return render(request, 'erm/edit_product.html', context)
 
 def Orders(request):
-    pass
+    orders = Order.objects.all()
+    
+    context = {
+        'orders':orders
+    }
+    return render(request, 'erm/order.html', context)
 
 def Payment(request):
     pass

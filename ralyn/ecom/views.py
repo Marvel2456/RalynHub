@@ -6,7 +6,7 @@ import datetime
 from account.models import Customer
 from .forms import UpdateCustomerForm, CreateReviewForm
 from django.contrib import messages
-from .utils import cookieCart
+from .utils import cookieCart, cartData, guestOrder
 from django.core.paginator import Paginator
 # Create your views here.
 
@@ -16,16 +16,10 @@ def get_categories(request):
 
 def Index(request):
  
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        total_quantity = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        order = cookieData['order']
-        items = cookieData['items']
-        total_quantity = cookieData['total_quantity']
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
     
     category = request.GET.get('category')
 
@@ -95,16 +89,10 @@ def Products(request):
     return render(request, 'ecom/products.html', context)
 
 def Cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        total_quantity = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        order = cookieData['order']
-        items = cookieData['items']
-        total_quantity = cookieData['total_quantity']
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
         
 
     context = {
@@ -177,40 +165,36 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-
-        if total == order.get_cart_total:
-            order.completed = True
-        order.save()
-
-        if order.shipping == True:
-            ShippingDetail.objects.create(
-                customer = customer,
-                order = order,
-                address = data['shipping']['address'],
-                state = data['shipping']['state'],
-                city = data['shipping']['city'],
-                zipcode = data['shipping']['zipcode'],
-                phone = data['shipping']['phone'],
-            )
-
+        
     else:
-        print('User is not authenticated')
+        customer, order = guestOrder(request, data)
+        
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
+
+    if total == order.get_cart_total:
+        order.completed = True
+    order.save()
+
+    if order.shipping == True:
+        ShippingDetail.objects.create(
+            customer = customer,
+            order = order,
+            address = data['shipping']['address'],
+            state = data['shipping']['state'],
+            city = data['shipping']['city'],
+            zipcode = data['shipping']['zipcode'],
+            phone = data['shipping']['phone'],
+        )
+
     return JsonResponse('Payment completed', safe=False)
 
 
 def Checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        total_quantity = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        order = cookieData['order']
-        items = cookieData['items']
-        total_quantity = cookieData['total_quantity']
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
 
     context = {
         'items':items,
@@ -239,17 +223,10 @@ def Profile(request):
 
 
 def productDetail(request, uuid):
-   
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        total_quantity = order.get_cart_items
-
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        total_quantity = order['get_cart_items']
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
 
     product = Product.objects.get(id=uuid)
     
@@ -264,6 +241,7 @@ def productDetail(request, uuid):
             messages.success(request, 'review successfully submited')
             return redirect('detail')
     context = {
+        'order':order,
         'items':items,
         'total_quantity':total_quantity,
         'product':product,
@@ -274,7 +252,6 @@ def productDetail(request, uuid):
 def orderHistory(request):
     customer = request.user.customer
     order = Order.objects.filter(customer=customer)
-    # order_count = order.count()
     
     context = {
         'order':order,
