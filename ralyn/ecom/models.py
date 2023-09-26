@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
+import secrets
 from account.models import User, Customer
+from .paystack import Paystack
 
 # Create your models here.
 
@@ -157,6 +159,7 @@ class PaymentHistory(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     paystack_charge_id = models.CharField(max_length=100, default='', blank=True)
     paystack_access_code = models.CharField(max_length=100, default='', blank=True)
+    # ref = models.CharField(max_length=200, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     amount = models.DecimalField(max_digits=20, decimal_places=3, blank=True, null=True)
     paid = models.BooleanField(default=False, blank=True)
@@ -167,4 +170,28 @@ class PaymentHistory(models.Model):
 
     def __str__(self) -> str:
         return f'{self.customer.email} - {self.order} - {self.amount} - {self.date}'
+
+    
+    def save(self, *args, **kwargs):
+        while not self.ref:
+            ref = secrets.token_urlsafe(50)
+            object_with_similar_ref = PaymentHistory.objects.filter(ref=ref)
+            if not object_with_similar_ref:
+                self.ref = ref
+    
+        return super().save(*args, **kwargs)
+    
+    def amount_value(self):
+        return int(self.amount) * 100
+
+    def verify_payment(self):
+        paystack = Paystack()
+        status, result = paystack.verify_payment(self.ref, self.amount)
+        if status:
+            if result['amount'] / 100 == self.amount:
+                self.verified = True
+            self.save()
+        if self.verified:
+            return True
+        return False
 

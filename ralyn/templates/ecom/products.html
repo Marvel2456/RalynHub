@@ -1,103 +1,125 @@
-{% extends 'base.html' %}
-{% load static %}
-
+{% extends 'base_erm.html' %}
 {% block title %} Products {% endblock title %}
 
 {% block content %}
-
-<!-- Page Title -->
-<section class="page-title">
-    <div class="auto-container">
-        <h2>Shop Page</h2>
-        <ul class="bread-crumb clearfix">
-            <li><a href="index.html">Home</a></li>
-            <li>Pages</li>
-            <li>Shop Page</li>
-        </ul>
-    </div>
-</section>
-<!-- End Page Title -->
-
-<!-- Sidebar Page Container -->
-<div class="sidebar-page-container">
-    <div class="auto-container">
-        <div class="row clearfix">
+<div class="ec-content-wrapper mt-5">
+    <div class="content">
+        <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+            <div>
+                <h1>Product</h1>
+                <p class="breadcrumbs"><span><a href="{% url 'index' %}">Home</a></span>
+                    <span><i class="mdi mdi-chevron-right"></i></span>Product
+                </p>
+            </div>
             
-            <!-- Content Side -->
-            <div class="content-side col-lg-12 col-md-12 col-sm-12">
-                <!-- Filter Box -->
-                <div class="filter-box">
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div class="right-box d-flex">
-                            <div class="form-group">
-                                <select name="currency" class="custom-select-box">
-                                    <option>Recently Added</option>
-                                    <option>Added 01</option>
-                                    <option>Added 02</option>
-                                    <option>Added 03</option>
-                                    <option>Added 04</option>
-                                </select>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-default">
+                    <div class="card-header card-header-border-bottom d-flex justify-content-between">
+                        <div class="card-bar">
+                            <div class="col-lg-6 col-md-12">
+                                <form class="form-horizontal" method='get'>
+                                    <input type="text" name="product" class="form-control" id="searchProduct"
+                                        placeholder="search with product name..">
+                                </form>
                             </div>
-                            <ul class="pages-list">
-                                <li><a class="flaticon-list" href="#"></a></li>
-                                <li><a class="flaticon-menu-2" href="#"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Filter Box -->
-                
-                <div class="shops-outer">
-                   
-                    <div class="row clearfix">
-                        {% for product in product %}
-                        <!-- Shop Item -->
-                        <div class="shop-item col-lg-3 col-md-4 col-sm-12">
-                            <div class="inner-box" >
-                                <div class="image">
-                                    <a href="{% url 'detail' product.id %}"><img style="height:280px; width:100%; " src="{{product.imageURL}}" alt="" /></a>
+                            <div class="col-lg-6 col-md-12 sort">
+                                <div class="col-lg-4 col-md-6 p-space dropdown">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Categories
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="{% url 'index' %}">ALL Category</a></li>
+                                          {% for category in categories %}
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'index' %}?category={{ category.name }}">{{ category.name }}</a>
+                                            </li>
+                                          {% endfor %}
+                                        </ul>
+                                    </div>
                                     
                                 </div>
-                                <div class="lower-content">
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="light fa fa-star"></span>
-                                    </div>
-                                    <h6><a href="shop-detail.html">{{product.name}}<br> {{product.category}}</a></h6>
-                                    
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="price">${{product.price}}</div>
-                                        <!-- Add to cart -->
-                                        <div class="quantity-box">
-                                            {% comment %} <button class="theme-btn btn-style-one align-item-end update-cart" data-product={{product.id}} data-action="add">Add to cart</button> {% endcomment %}
+                                
+                                <div class="col-lg-4 col-md-6 p-space">
+                                    <select class="form-control" id="dropdownOrderBy">
+                                        <option value="ALL">ORDER BY</option>
+                                        <option value="MEN">Letest</option>
+                                        <option value="WOMAN">Price Low - High</option>
+                                        <option value="KID">Price High - Low</option>
+                                        <option value="OTHER">OTHER</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="row">
+                            {% for products in product_page %}
+                            <div class="col-lg-3 col-md-4 col-sm-6" id="productList">
+                                <div class="card-wrapper">
+                                    <div class="card-container">
+                                        <div class="card-top">
+                                            <a data-product={{products.id}} data-action="add" class="btn update-cart"><img class="card-image" style="height:250px; width:250px; object-fit:cover;" src="{{products.imageURL}}"
+                                                alt="" /></a>
+                                        </div>
+                                        <div class="card-bottom">
+                                            <h3>{{products.name}}</h3>
+                                            <p>${{products.price}}</p>
+                                            
+                                        </div>
+                                        <div class="card-action">
+                                            <div class="card-edit"><a href="" class=""><i
+                                                    class="mdi mdi-circle-edit-outline"></i></a></div>
+                                            <div class="card-preview"><a href="{% url 'detail' products.id %}" class=""><i class="mdi mdi-eye-outline"></i></a>
+                                            </div>
+                                            <div class="card-remove"><a href="" class=""><i
+                                                    class="mdi mdi mdi-cart-outline"></i></a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %} 
+                             
+                        <div class="row">
+                            <nav aria-label="Page navigation example p-0">
+                                <ul class="pagination pagination-seperated pagination-seperated-rounded">
+                                    {% if product_page.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ product_page.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true"
+                                                class="mdi mdi-chevron-left mr-1"></span> Prev
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+
+                                    {% for i in nums %}
+                                    <li class="page-item active">
+                                        <a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a>
+                                    </li>
+                                    {% endfor %}
+
+                                    {% if product_page.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ product_page.next_page_number }}" aria-label="Next">
+                                            Next
+                                            <span aria-hidden="true"
+                                                class="mdi mdi-chevron-right ml-1"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                    
-                
-                    <!-- Styled Pagination -->
-                    <ul class="styled-pagination text-center">
-                        <li class="next"><a href="#"><span class="fa fa-angle-double-left"></span></a></li>
-                        <li><a href="#" class="active">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li class="next"><a href="#"><span class="fa fa-angle-double-right"></span></a></li>
-                    </ul>
-                    <!-- End Styled Pagination -->
-                
                 </div>
-                
             </div>
-            
-           
-            
         </div>
     </div>
 </div>

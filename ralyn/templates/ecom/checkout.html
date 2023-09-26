@@ -116,7 +116,7 @@
                                 <input type="text" name="phone" class="form-control" id="exampleFormControlInput1" placeholder="Phone Number">
                             </div>
                             <div class="app-card-footer p-4 mt-auto">
-                                <button class="btn btn-block mt-2 btn-primary btn-pill" id="form-button" type="submit">Add Shipping Details</button>
+                                <button class="btn btn-block mt-2 btn-primary btn-pill" id="form-button " type="submit">Add Shipping Details</button>
                             </div>
                             <!-- Add your checkout form fields and submit button here -->
                         </form>
@@ -125,13 +125,46 @@
                 
             </div>
         </div>
-        <div class="app-card-footer p-4 mt-auto d-none" id="payment">
-            <a class="btn btn-block mt-2 btn-primary btn-pill" id="make-payment" type="submit">Make Payment</a>
-        </div>
+        <form action="{% url 'initiate_payment'  %}" method="post">
+            {% csrf_token %}
+            <div class="app-card-footer p-4 mt-auto d-none" id="payment">
+                <button class="btn btn-block mt-2 btn-primary btn-pill" id="make-payment paystack-button">Make Payment</button>
+            </div>
+        </form>
     </div>
 </div>
-
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script type='text/javascript'>
+
+    document.getElementById('paystack-button').addEventListener('click', function () {
+        
+        var totalAmount = {{ order.get_cart_total }};
+
+        
+        var handler = PaystackPop.setup({
+            key: 'pk_test_4472c15c6d9d3dc2c2ef377a80497eedecd2851e', // Replace with your Paystack public key
+            email: {{ order.customer.email }}, // Replace with the customer's email
+            amount: totalAmount * 100, // Amount in kobo (multiply by 100)
+            currency: 'NGN', // Set the currency as per your requirements
+            ref: 'your_unique_reference', // Replace with a unique reference for the transaction
+            callback: function (response) {
+                // Handle the Paystack response here, you can send it to your server for further processing
+                console.log(response);
+
+                // After successful payment, you can redirect the user to a success page or perform other actions
+                window.location.href = "{% url 'index' %}";
+            },
+            onClose: function () {
+                // Handle the case when the user closes the Paystack dialog
+                alert('Payment was not completed');
+            }
+        });
+
+        // Open the Paystack payment dialog
+        handler.openIframe();
+    });
+    
+
     var shipping = '{{order.shipping}}'
     var total = '{{order.get_cart_total|floatformat:2}}'
 
@@ -201,6 +234,7 @@
             window.location.href = "{% url 'index' %}"
         })
     }
+
 
 </script>
 {% endblock content %}

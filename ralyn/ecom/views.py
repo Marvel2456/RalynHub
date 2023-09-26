@@ -3,18 +3,21 @@ from . models import *
 from django.http import JsonResponse
 import json
 import datetime
+import requests
+from django.views.decorators.csrf import csrf_exempt
 from account.models import Customer
 from .forms import UpdateCustomerForm, CreateReviewForm
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 from django.core.paginator import Paginator
+from django.conf import settings
 # Create your views here.
 
 def get_categories(request):
     categories = Category.objects.all().values('id', 'name')
     return JsonResponse(list(categories), safe=False)
 
-def Index(request):
+def productIndex(request):
  
     data = cartData(request)
     order = data['order']
@@ -49,7 +52,7 @@ def Index(request):
         'nums':nums,
         'categories':categories,
     }
-    return render(request, 'ecom/index.html', context)
+    return render(request, 'ecom/products.html', context)
 
 def About(request):
 
@@ -68,25 +71,12 @@ def About(request):
     }
     return render(request, 'ecom/about.html', context)
 
-def Products(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        total_quantity = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        total_quantity = order['get_cart_items']
-
+def Index(request):
     product = Product.objects.all()
     context = {
         'product':product,
-        'items':items,
-        'order':order,
-        'total_quantity':total_quantity,
         }
-    return render(request, 'ecom/products.html', context)
+    return render(request, 'ecom/index.html', context)
 
 def Cart(request):
     data = cartData(request)
@@ -202,6 +192,106 @@ def Checkout(request):
         'total_quantity':total_quantity,
     }
     return render(request, 'ecom/checkout.html', context)
+
+
+# def make_payment(request, uuid):
+#     order = Order.objects.get(id=uuid)
+#     if request.method == "POST":
+#         amount = order.get_cart_total
+#         email = order.customer.email
+
+#         pk = settings.PAYSTACK_PUBLIC_KEY
+
+#         payment = PaymentHistory.objects.create(amount=amount, email=email)
+#         payment.save()
+
+#         context = {
+#             'payment': payment,
+#             'field_values': request.POST,
+#             'paystack_pub_key': pk,
+#             'amount_value': payment.amount_value() if payment else 0,
+#             'order':order,
+#         }
+#         return render(request, 'ecom/checkout.html', context)
+
+# def verify_payment(request, ref):
+#     payment = PaymentHistory.objects.get(ref=ref)
+#     paid = payment.verify_payment()
+
+#     if paid:
+#         payment.save()
+#         messages.success(request, "Payment successful")
+#         return redirect('index')
+
+@csrf_exempt
+def initiatePayment(request):
+    order_id = request.data.get('order_id')
+    if request.method == 'POST':
+
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
+             return JsonResponse({'error': 'Invalid order ID'}, status=400)
+            
+        amount = order.get_cart_total
+        email = order.customer.email
+       
+        paystack_secret_key = settings.PAYSTACK_SECRET_KEY
+
+        
+        paystack_url = 'https://api.paystack.co/transaction/initialize'
+        headers = {
+            'Authorization': f'Bearer {paystack_secret_key}',
+            'Content-Type': 'application/json',
+        }
+        data = {
+            'amount': amount * 100,  # Amount in kobo (multiply by 100)
+            'email': email,
+        }
+        response = requests.post(paystack_url, json=data, headers=headers)
+
+        if response.status_code == 200:
+            data = response.json()
+            
+            return JsonResponse({'data': data})
+        else:
+            return JsonResponse({'error': 'Payment initialization failed'}, status=400)
+    
+    
+
+@csrf_exempt
+def paystackCallback(request):
+    if request.method == "POST":
+        try:
+            callback_data = json.loads(request.body.decode('utf-8'))
+
+            payment_status = callback_data.get("status")
+            order_id = callback_data.get("order_id")
+            paystack_charge_id = callback_data.get("paystack_charge_id")
+            paystack_access_code = callback_data.get("paystack_access_code")
+
+            if payment_status == "success":
+                try:
+                    payment_history = PaymentHistory.objects.get(order__id=order_id)
+
+                    payment_history.paystack_charge_id = paystack_charge_id
+                    payment_history.paystack_access_code = paystack_access_code
+                    payment_history.paid = True
+
+                    payment_history.save()
+
+                    return JsonResponse({"message": "Payment successfully updated."}, status=200)
+
+                except PaymentHistory.DoesNotExist:
+                    return JsonResponse({"message": "Payment history not found."}, status=404)
+            else:
+                return JsonResponse({"message": "Payment not successful."}, status=400)
+
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid JSON data in the request."}, status=400)
+    else:
+        return JsonResponse({"message": "Invalid request method."}, status=405)
+
 
 def Contact(request):
     return render(request, 'ecom/contact.html')
