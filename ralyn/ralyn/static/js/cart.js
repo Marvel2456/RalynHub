@@ -74,7 +74,7 @@ function updateQuantity(e){
     let inputvalue = e.target.value
     let productId = e.target.dataset.product
 
-    const data = {prod_id: productId, val: inputvalue};
+    const data = {'prod_id': productId, 'val': inputvalue};
     let url = '/update_quantity/'
 
     fetch(url, {

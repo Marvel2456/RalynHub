@@ -6,11 +6,12 @@ import datetime
 import requests
 from django.views.decorators.csrf import csrf_exempt
 from account.models import Customer
-from .forms import UpdateCustomerForm, CreateReviewForm
+from .forms import UpdateCustomerForm, CreateReviewForm, ShippingForm, PaymentForm
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 from django.core.paginator import Paginator
 from django.conf import settings
+
 # Create your views here.
 
 def get_categories(request):
@@ -123,11 +124,11 @@ def UpdateItems(request):
 
 
 def updateQuantity(request):
-    # orderItem = OrderItem.objects.get(id=request.POST['orderItemId'])
+    
     if request.user.is_authenticated:
         data = json.loads(request.body)
         input_value = int(data['val'])
-        product_Id = data['prod_id']
+        product_Id = str(data['prod_id'])
         
         customer = request.user.customer
         product = Product.objects.get(id=product_Id)
@@ -139,7 +140,6 @@ def updateQuantity(request):
         if orderItem.quantity <= 0:
             orderItem.delete()
        
-       
     context = {
         'sub_total':orderItem.get_total,
         'final_total':order.get_cart_total,
@@ -148,149 +148,80 @@ def updateQuantity(request):
 
     return JsonResponse(context, safe=False)
 
-def processOrder(request):
-    transaction_id = datetime.datetime.now().timestamp()
-    data = json.loads(request.body)
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        
-    else:
-        customer, order = guestOrder(request, data)
-        
-    total = float(data['form']['total'])
-    order.transaction_id = transaction_id
-
-    if total == order.get_cart_total:
-        order.completed = True
-    order.save()
-
-    if order.shipping == True:
-        ShippingDetail.objects.create(
-            customer = customer,
-            order = order,
-            address = data['shipping']['address'],
-            state = data['shipping']['state'],
-            city = data['shipping']['city'],
-            zipcode = data['shipping']['zipcode'],
-            phone = data['shipping']['phone'],
-        )
-
-    return JsonResponse('Payment completed', safe=False)
-
-
 def Checkout(request):
     data = cartData(request)
     order = data['order']
     items = data['items']
     total_quantity = data['total_quantity']
+    customer = request.user.customer
+    form = ShippingForm()
+    form_submitted = False
+    if request.method == 'POST':
+        form = ShippingForm(request.POST)
+        if form.is_valid():
+            shipping = form.save(commit=False)
+            shipping.order = order
+            shipping.customer = customer
+            shipping.save()
+            order.save()
+            form_submitted = True
+            messages.success(request, "Shipping address updated")
 
     context = {
+        'form':form,
+        'customer': customer,
         'items':items,
         'order':order,
         'total_quantity':total_quantity,
+        'form_submitted': form_submitted,
     }
     return render(request, 'ecom/checkout.html', context)
 
 
-# def make_payment(request, uuid):
-#     order = Order.objects.get(id=uuid)
-#     if request.method == "POST":
-#         amount = order.get_cart_total
-#         email = order.customer.email
 
-#         pk = settings.PAYSTACK_PUBLIC_KEY
-
-#         payment = PaymentHistory.objects.create(amount=amount, email=email)
-#         payment.save()
-
-#         context = {
-#             'payment': payment,
-#             'field_values': request.POST,
-#             'paystack_pub_key': pk,
-#             'amount_value': payment.amount_value() if payment else 0,
-#             'order':order,
-#         }
-#         return render(request, 'ecom/checkout.html', context)
-
-# def verify_payment(request, ref):
-#     payment = PaymentHistory.objects.get(ref=ref)
-#     paid = payment.verify_payment()
-
-#     if paid:
-#         payment.save()
-#         messages.success(request, "Payment successful")
-#         return redirect('index')
-
-@csrf_exempt
 def initiatePayment(request):
-    order_id = request.data.get('order_id')
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
+    pk = settings.PAYSTACK_PUBLIC_KEY
+    customer = Customer.objects.get(user=request.user)
     if request.method == 'POST':
+        amount = request.POST['amount']
+        email = request.POST['email']
+		
 
-        try:
-            order = Order.objects.get(id=order_id)
-        except Order.DoesNotExist:
-             return JsonResponse({'error': 'Invalid order ID'}, status=400)
-            
-        amount = order.get_cart_total
-        email = order.customer.email
-       
-        paystack_secret_key = settings.PAYSTACK_SECRET_KEY
+        payment = PaymentHistory.objects.create(amount=amount, order=order, email=email, customer=customer)
+        payment.save()
+        print("Amount:", amount)
+        print("Order:", order)
 
-        
-        paystack_url = 'https://api.paystack.co/transaction/initialize'
-        headers = {
-            'Authorization': f'Bearer {paystack_secret_key}',
-            'Content-Type': 'application/json',
-        }
-        data = {
-            'amount': amount * 100,  # Amount in kobo (multiply by 100)
-            'email': email,
-        }
-        response = requests.post(paystack_url, json=data, headers=headers)
-
-        if response.status_code == 200:
-            data = response.json()
-            
-            return JsonResponse({'data': data})
-        else:
-            return JsonResponse({'error': 'Payment initialization failed'}, status=400)
+        context = {
+            'order': order,
+            'items': items,
+            'total_quantity': total_quantity,
+            'customr':customer,
+			'payment': payment,
+			'field_values': request.POST,
+			'paystack_pub_key': pk,
+			'amount_value': payment.amount_value(),
+		}
+        return render(request, 'ecom/make_payment.html', context)
     
     
+   
+    return render(request, 'ecom/payment.html', {'order':order})
 
-@csrf_exempt
-def paystackCallback(request):
-    if request.method == "POST":
-        try:
-            callback_data = json.loads(request.body.decode('utf-8'))
 
-            payment_status = callback_data.get("status")
-            order_id = callback_data.get("order_id")
-            paystack_charge_id = callback_data.get("paystack_charge_id")
-            paystack_access_code = callback_data.get("paystack_access_code")
+def verify_payment(request, ref):
+    customer = request.user.customer
+    payment = PaymentHistory.objects.filter(customer=customer).get(ref=ref)
+    verified = payment.verify_payment()
 
-            if payment_status == "success":
-                try:
-                    payment_history = PaymentHistory.objects.get(order__id=order_id)
+    if verified:
+	    return redirect('products')
+   
 
-                    payment_history.paystack_charge_id = paystack_charge_id
-                    payment_history.paystack_access_code = paystack_access_code
-                    payment_history.paid = True
-
-                    payment_history.save()
-
-                    return JsonResponse({"message": "Payment successfully updated."}, status=200)
-
-                except PaymentHistory.DoesNotExist:
-                    return JsonResponse({"message": "Payment history not found."}, status=404)
-            else:
-                return JsonResponse({"message": "Payment not successful."}, status=400)
-
-        except json.JSONDecodeError:
-            return JsonResponse({"message": "Invalid JSON data in the request."}, status=400)
-    else:
-        return JsonResponse({"message": "Invalid request method."}, status=405)
 
 
 def Contact(request):

@@ -1,0 +1,62 @@
+{% extends 'base_erm.html' %}
+
+{% block title %}  {% endblock title %}
+
+{% block content %}
+
+<div class="col-lg-12 col-md-12 col-sm-12 mt-5">
+    <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+        <div class="app-card-header p-3 border-bottom-0">
+            <!-- Checkout Form Heading -->
+            <div class="row align-items-center gx-3">
+                <div class="col-auto">
+                    <div class="app-icon-holder">
+                        <!-- Add an icon for the checkout form if needed -->
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <h4 class="app-card-title">Make Payment</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 pt-3">
+            <div class="app-card-body px-4 w-100" id="">
+              
+                    
+                    
+                    <div class="mb-3">
+                        <transaction>You are about to fund your wallet with {{ payment.amount }} and transaction reference {{ payment.ref }}</p>
+                    </div>
+                    
+                    
+                        <button class="btn btn-block mt-2 btn-primary btn-pill" onClick="payWithPaystack()">Proceed to paystack</button>
+                    
+                    <!-- Add your checkout form fields and submit button here -->
+            </div>
+        </div>
+        
+    </div>
+</div>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+    function payWithPaystack() {
+		let currency = "NGN";
+		let plan = "";
+		let ref = "{{ payment.ref }}";
+		let amount = "{{ payment.amount }}";
+		let obj = {
+			key: "{{ paystack_pub_key }}",
+			email: "{{ payment.email }}",
+			amount: "{{ amount_value }}",
+			ref: ref,
+			callback: function (response) {
+				window.location.href = "{% url 'verify_payment' payment.ref %}";
+			},
+		};
+		
+
+		var handler = PaystackPop.setup(obj);
+		handler.openIframe();
+	}
+</script>
+{% endblock content %}

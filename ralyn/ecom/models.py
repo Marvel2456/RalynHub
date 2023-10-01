@@ -4,6 +4,7 @@ import uuid
 import secrets
 from account.models import User, Customer
 from .paystack import Paystack
+from datetime import datetime
 
 # Create your models here.
 
@@ -154,14 +155,25 @@ class Review(models.Model):
         return self.customer.username
     
 
+class Contact(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    name = models.CharField(max_length=225, blank=True, null=True)
+    email = models.CharField(max_length=225, blank=True, null=True)
+    subject = models.CharField(max_length=225, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.name} - {self.created_at}'
+    
+
 class PaymentHistory(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False) 
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    paystack_charge_id = models.CharField(max_length=100, default='', blank=True)
-    paystack_access_code = models.CharField(max_length=100, default='', blank=True)
-    # ref = models.CharField(max_length=200, blank=True)
+    email = models.EmailField()
+    ref = models.CharField(max_length=200, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-    amount = models.DecimalField(max_digits=20, decimal_places=3, blank=True, null=True)
+    amount = models.FloatField(blank=True, null=True)
     paid = models.BooleanField(default=False, blank=True)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -182,16 +194,19 @@ class PaymentHistory(models.Model):
         return super().save(*args, **kwargs)
     
     def amount_value(self):
-        return int(self.amount) * 100
+        return int(float(self.amount) * 100)
 
     def verify_payment(self):
         paystack = Paystack()
         status, result = paystack.verify_payment(self.ref, self.amount)
         if status:
             if result['amount'] / 100 == self.amount:
-                self.verified = True
+                self.paid = True
+                self.order.completed = True
+                self.order.transaction_id = datetime.now()
+                self.order.save()
             self.save()
-        if self.verified:
+        if self.paid:
             return True
         return False
 
