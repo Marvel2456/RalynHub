@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from . models import *
 from django.http import JsonResponse
 import json
-import datetime
-import requests
 from django.views.decorators.csrf import csrf_exempt
 from account.models import Customer
 from .forms import UpdateCustomerForm, CreateReviewForm, ShippingForm, PaymentForm
@@ -74,8 +72,10 @@ def About(request):
 
 def Index(request):
     product = Product.objects.all()
+    prod_list = Product.objects.all()[:10]
     context = {
         'product':product,
+        'prod_list':prod_list,
         }
     return render(request, 'ecom/index.html', context)
 
