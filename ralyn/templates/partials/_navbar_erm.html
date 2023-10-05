@@ -33,7 +33,7 @@
                         <li class="dropdown-header">
                             <img src="{% static 'images/user/user.png' %}" class="img-circle" alt="User Image" />
                             <div class="d-inline-block">
-                                <small class="pt-1">{{user.email}}</small>
+                                <small class="pt-1">{{user.username}}</small>
                             </div>
                         </li>
                         {% if request.user.is_authenticated %}
