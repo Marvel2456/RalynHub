@@ -71,10 +71,8 @@ def About(request):
     return render(request, 'ecom/about.html', context)
 
 def Index(request):
-    product = Product.objects.all()
-    prod_list = Product.objects.all()[:10]
+    prod_list = Product.objects.all()[:6]
     context = {
-        'product':product,
         'prod_list':prod_list,
         }
     return render(request, 'ecom/index.html', context)
@@ -222,10 +220,20 @@ def verify_payment(request, ref):
 	    return redirect('products')
    
 
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
 
+        contacts = Contact(name=name, email=email, subject=subject, message=message)
 
-def Contact(request):
-    return render(request, 'ecom/contact.html')
+        contacts.save()
+
+        messages.success(request, 'Your request has been submitted thank you')
+        return redirect('contact')
+    return render(request, 'ecom/index.html')
 
 def Profile(request):
     customer = request.user.customer
