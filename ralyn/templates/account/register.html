@@ -1,137 +1,90 @@
-{% extends 'base.html' %}
-{% block title %} Register {% endblock title %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<!-- Page Title -->
-<section class="page-title">
-    <div class="auto-container">
-        <h2>Sign Up Page</h2>
-        <ul class="bread-crumb clearfix">
-            <li><a href="index.html">Home</a></li>
-            <li>Pages</li>
-            <li>Register</li>
-        </ul>
-    </div>
-</section>
-<!-- End Page Title -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ekka - Admin Dashboard HTML Template.">
 
-<!-- Register Section -->
-<div class="register-section">
-    <div class="auto-container">
-        <div class="inner-container">
-            <div class="row clearfix">
-                <div class="column col-lg-3 col-md-12 col-sm-12">
+  <title>Ralyn Register</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
+
+  <!-- Ekka CSS -->
+  <link id="ekka-css" rel="stylesheet" href="{% static 'css/ekka.css' %}" />
+
+  <!-- FAVICON -->
+  
+</head>
+
+<body class="sign-inup" id="body">
+  <div class="container d-flex align-items-center justify-content-center form-height pt-24px pb-24px">
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-10">
+        <div class="card">
+          <div class="card-header bg-primary">
+            <div class="ec-brand">
+              <a href="index.html" title="Ekka">
+                <img class="ec-brand-icon" src="{% static 'images/logo/ralyn.png' %}" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="card-body p-5">
+            <h4 class="text-dark mb-5">Sign Up</h4>
+
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group col-md-12 mb-4">
+                  <input type="text" name="username" class="form-control" id="name" placeholder="Username">
+                </div>
+
+                <div class="form-group col-md-12 mb-4">
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                </div>
+
+                <div class="form-group col-md-12 ">
+                  <input type="password" name="password1" class="form-control" id="password" placeholder="Password">
+                </div>
+
+                <div class="form-group col-md-12 ">
+                  <input type="password" name="password2" class="form-control" id="cpassword" placeholder="Confirm Password">
+                </div>
+
+                <div class="col-md-12">
+                  <div class="d-inline-block mr-3">
                     
-                </div>
-                <!-- Column -->
-                <div class="column col-lg-6 col-md-12 col-sm-12">
-                    <!-- Login Form -->
-                    <div class="styled-form">
-                        <h4>Sign Up</h4>
-                        <form method="post" action="">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label>Email address</label>
-                                <input type="email" name="email" value="" placeholder="Email Adress" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" name="username" value="" placeholder=" Username" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password1" value="" placeholder="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Re-type Password</label>
-                                <input type="password" name="password2" value="" placeholder="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="theme-btn btn-style-one">
-                                    Sign Up
-                                </button>
-                                <small>Already have an account, <a href="{% url 'login' %}" class="">login</a></small>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- Column -->
-                <div class="column col-lg-3 col-md-12 col-sm-12">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Register Section -->
+                  </div>
 
-<!-- Gallery Section -->
-<section class="gallery-section">
-    <div class="outer-container">
-        <div class="instagram-carousel owl-carousel owl-theme">
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/1.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
+                  <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>
+
+                  <p class="sign-upp">Already have an account?
+                    <a class="text-blue" href="{% url 'login' %}">Sign in</a>
+                  </p>
                 </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/2.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/3.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/3.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/4.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/4.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/5.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/5.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/6.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/6.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</section>
-<!-- End Gallery Section -->
-{% endblock content %}
+  </div>
+
+  <!-- Javascript -->
+  <script src="assets/plugins/jquery/jquery-3.5.1.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="assets/plugins/slick/slick.min.js"></script>
+
+  <!-- Ekka Custom -->
+  <script src="assets/js/ekka.js"></script>
+</body>
+
+</html>

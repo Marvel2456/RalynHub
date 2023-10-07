@@ -1,0 +1,49 @@
+{% extends 'base_erm.html' %}
+
+{% block title %}  {% endblock title %}
+
+{% block content %}
+
+<div class="col-lg-12 col-md-12 col-sm-12 mt-5">
+    <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+        <div class="app-card-header p-3 border-bottom-0">
+            <!-- Checkout Form Heading -->
+            <div class="row align-items-center gx-3">
+                <div class="col-auto">
+                    <div class="app-icon-holder">
+                        <!-- Add an icon for the checkout form if needed -->
+                    </div>
+                </div>
+                <div class="col-auto pt-3">
+                    <h4 class="app-card-title">Make Payment</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 pt-3">
+            <div class="app-card-body px-4 w-100" id="">
+                
+                <form action="{% url 'initiate_payment' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Customer</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="{{request.user.email}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Price Total</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="amount" value="{{order.get_cart_total}}" readonly>
+                    </div>
+                    
+                    <div class="app-card-footer p-4 mt-auto">
+                        <button class="btn btn-block mt-2 btn-primary btn-pill" type="submit">Click to Proceed</button>
+                        
+                    </div>
+                    <!-- Add your checkout form fields and submit button here -->
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock content %}

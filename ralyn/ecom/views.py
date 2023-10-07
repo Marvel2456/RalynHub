@@ -2,30 +2,56 @@ from django.shortcuts import render, redirect
 from . models import *
 from django.http import JsonResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
 from account.models import Customer
-from .forms import UpdateCustomerForm
+from .forms import UpdateCustomerForm, CreateReviewForm, ShippingForm, PaymentForm
 from django.contrib import messages
+from .utils import cookieCart, cartData, guestOrder
+from django.core.paginator import Paginator
+from django.conf import settings
+
 # Create your views here.
 
-def Index(request):
+def get_categories(request):
+    categories = Category.objects.all().values('id', 'name')
+    return JsonResponse(list(categories), safe=False)
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
+def productIndex(request):
+ 
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
+    
+    category = request.GET.get('category')
+
+    if category is None:
+        products = Product.objects.all()
     else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        cart_items = order['get_cart_items']
+        products = Product.objects.filter(category__name=category)
 
-    number_of_products = 10
-    products = Product.objects.all()[:number_of_products]
+    product_contains_query = request.GET.get('product')
+
+    if product_contains_query != '' and product_contains_query is not None:
+        products = products.filter(name__icontains=product_contains_query)
+
+    categories = Category.objects.all()
+
+    paginator = Paginator(products, 2)
+    page = request.GET.get('page')
+    product_page = paginator.get_page(page)
+    nums = "a" * product_page.paginator.num_pages
+    
     context = {
         'products':products,
-        'cart_items':cart_items,
+        'items':items,
+        'order':order,
+        'total_quantity':total_quantity,
+        'product_page':product_page,
+        'nums':nums,
+        'categories':categories,
     }
-    return render(request, 'ecom/index.html', context)
+    return render(request, 'ecom/products.html', context)
 
 def About(request):
 
@@ -33,50 +59,35 @@ def About(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, completed=False)
         items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
+        total_quantity = order.get_cart_items
     else:
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        cart_items = order['get_cart_items']
+        total_quantity = order['get_cart_items']
 
     context ={
-        'cart_items':cart_items,
+        'total_quantity':total_quantity,
     }
     return render(request, 'ecom/about.html', context)
 
-def Products(request):
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        cart_items = order['get_cart_items']
-
-    product = Product.objects.all()
+def Index(request):
+    prod_list = Product.objects.all()[:6]
     context = {
-        'product':product,
-        'cart_items':cart_items,
+        'prod_list':prod_list,
         }
-    return render(request, 'ecom/products.html', context)
+    return render(request, 'ecom/index.html', context)
 
 def Cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-        cart_items = order.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
-        cart_items = order['get_cart_items']
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
+        
+
     context = {
         'items':items,
         'order':order,
-        'cart_items':cart_items,
+        'total_quantity':total_quantity,
     }
     return render(request, 'ecom/cart.html', context)
 
@@ -101,25 +112,128 @@ def UpdateItems(request):
 
     if orderItem.quantity <= 0:
         orderItem.delete()
+
+    context = {
+
+        'total_quantity': order.get_cart_items,
+    }
         
-    return JsonResponse('Item added', safe=False)
+    return JsonResponse(context, safe=False)
+
+
+def updateQuantity(request):
+    
+    if request.user.is_authenticated:
+        data = json.loads(request.body)
+        input_value = int(data['val'])
+        product_Id = str(data['prod_id'])
+        
+        customer = request.user.customer
+        product = Product.objects.get(id=product_Id)
+        order, created = Order.objects.get_or_create(customer=customer, completed=False)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+        orderItem.quantity = input_value
+        orderItem.save()
+
+        if orderItem.quantity <= 0:
+            orderItem.delete()
+       
+    context = {
+        'sub_total':orderItem.get_total,
+        'final_total':order.get_cart_total,
+        'total_quantity':order.get_cart_items,
+    }
+
+    return JsonResponse(context, safe=False)
 
 def Checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, completed=False)
-        items = order.orderitem_set.all()
-    else:
-        items = []
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
+    customer = request.user.customer
+    form = ShippingForm()
+    form_submitted = False
+    if request.method == 'POST':
+        form = ShippingForm(request.POST)
+        if form.is_valid():
+            shipping = form.save(commit=False)
+            shipping.order = order
+            shipping.customer = customer
+            shipping.save()
+            order.save()
+            form_submitted = True
+            messages.success(request, "Shipping address updated")
+
     context = {
+        'form':form,
+        'customer': customer,
         'items':items,
-        'order':order
+        'order':order,
+        'total_quantity':total_quantity,
+        'form_submitted': form_submitted,
     }
     return render(request, 'ecom/checkout.html', context)
 
-def Contact(request):
-    return render(request, 'ecom/contact.html')
+
+
+def initiatePayment(request):
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
+    pk = settings.PAYSTACK_PUBLIC_KEY
+    customer = Customer.objects.get(user=request.user)
+    if request.method == 'POST':
+        amount = request.POST['amount']
+        email = request.POST['email']
+		
+
+        payment = PaymentHistory.objects.create(amount=amount, order=order, email=email, customer=customer)
+        payment.save()
+        print("Amount:", amount)
+        print("Order:", order)
+
+        context = {
+            'order': order,
+            'items': items,
+            'total_quantity': total_quantity,
+            'customr':customer,
+			'payment': payment,
+			'field_values': request.POST,
+			'paystack_pub_key': pk,
+			'amount_value': payment.amount_value(),
+		}
+        return render(request, 'ecom/make_payment.html', context)
+    
+    
+   
+    return render(request, 'ecom/payment.html', {'order':order})
+
+
+def verify_payment(request, ref):
+    customer = request.user.customer
+    payment = PaymentHistory.objects.filter(customer=customer).get(ref=ref)
+    verified = payment.verify_payment()
+
+    if verified:
+	    return redirect('products')
+   
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        contacts = Contact(name=name, email=email, subject=subject, message=message)
+
+        contacts.save()
+
+        messages.success(request, 'Your request has been submitted thank you')
+        return redirect('contact')
+    return render(request, 'ecom/index.html')
 
 def Profile(request):
     customer = request.user.customer
@@ -135,3 +249,41 @@ def Profile(request):
         'form':form
     }
     return render(request, 'ecom/profile.html', context)
+
+
+def productDetail(request, uuid):
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    total_quantity = data['total_quantity']
+
+    product = Product.objects.get(id=uuid)
+    
+    form = CreateReviewForm()
+    if request.method == 'POST':
+        form = CreateReviewForm(request.POST or None)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.customer = request.user.customer
+            review.product = product
+            review.save()
+            messages.success(request, 'review successfully submited')
+            return redirect('detail')
+    context = {
+        'order':order,
+        'items':items,
+        'total_quantity':total_quantity,
+        'product':product,
+        'form':form,
+    }
+    return render(request, 'ecom/detail.html', context)
+
+def orderHistory(request):
+    customer = request.user.customer
+    order = Order.objects.filter(customer=customer)
+    
+    context = {
+        'order':order,
+    }
+
+    return render(request, 'ecom/order_history.html', context)

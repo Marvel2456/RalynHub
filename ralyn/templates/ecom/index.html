@@ -3,1194 +3,313 @@
 {% block title %} Home {% endblock title %}
 
 {% block content %}
-<!-- Main Section -->
-<section class="main-slider">
-    <div class="main-slider-carousel owl-carousel owl-theme">
-        
-        <!-- Slide One -->
-        <div class="slide">
-            <!-- Ct Dot Animated -->
-            <div class="ct-dot-animated">
-                <div class="ct-dot-container">
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-            <!-- End Ct Dot Animated -->
-            <div class="image-layer" style="background-image: url(images/main-slider/image-1.jpg)"></div>
-            <div class="auto-container">
-                
-                <!-- Content Column -->
-                <div class="content-box">
-                    <div class="box-inner">
-                        <div class="vector-icon" style="background-image: url(images/main-slider/vector-1.png)"></div>
-                        <div class="vector-icon-two" style="background-image: url(images/main-slider/vector-2.png)"></div>
-                        <div class="vector-icon-three" style="background-image: url(images/main-slider/vector-3.png)"></div>
-                        <div class="sale-box">
-                            SALE
-                            <span>30<i>% OFF</i></span>
-                        </div>
-                        <div class="title">2022 Collection</div>
-                        <h1>Furniture <br> Collection</h1>
-                        <div class="price">Starting From <span>$560.99</span></div>
-                        <a href="shop-detail.html" class="shop-now">Shop Now</a>
-                        <!-- Arrival Box -->
-                        <a href="shop.html" class="arrival-box">New Arrival</a>
-                        <!-- Arrival Box -->
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Slide One -->
-        
-        <!-- Slide Two -->
-        <div class="slide">
-            <!-- Ct Dot Animated -->
-            <div class="ct-dot-animated">
-                <div class="ct-dot-container">
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-            <!-- End Ct Dot Animated -->
-            <div class="image-layer" style="background-image: url(images/main-slider/image-1.jpg)"></div>
-            <div class="auto-container">
-                
-                <!-- Content Column -->
-                <div class="content-box">
-                    <div class="box-inner">
-                        <div class="vector-icon" style="background-image: url(images/main-slider/vector-1.png)"></div>
-                        <div class="vector-icon-two" style="background-image: url(images/main-slider/vector-2.png)"></div>
-                        <div class="vector-icon-three" style="background-image: url(images/main-slider/vector-3.png)"></div>
-                        <div class="sale-box">
-                            SALE
-                            <span>30<i>% OFF</i></span>
-                        </div>
-                        <div class="title">2022 Collection</div>
-                        <h1>Furniture <br> Collection</h1>
-                        <div class="price">Starting From <span>$560.99</span></div>
-                        <a href="shop-detail.html" class="shop-now">Shop Now</a>
-                        <!-- Arrival Box -->
-                        <a href="shop.html" class="arrival-box">New Arrival</a>
-                        <!-- Arrival Box -->
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Slide Two -->
-        
-        <!-- Slide Three -->
-        <div class="slide">
-            <!-- Ct Dot Animated -->
-            <div class="ct-dot-animated">
-                <div class="ct-dot-container">
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                    <div class="ct-dot-item">
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-            <!-- End Ct Dot Animated -->
-            <div class="image-layer" style="background-image: url(images/main-slider/image-1.jpg)"></div>
-            <div class="auto-container">
-                
-                <!-- Content Column -->
-                <div class="content-box">
-                    <div class="box-inner">
-                        <div class="vector-icon" style="background-image: url(images/main-slider/vector-1.png)"></div>
-                        <div class="vector-icon-two" style="background-image: url(images/main-slider/vector-2.png)"></div>
-                        <div class="vector-icon-three" style="background-image: url(images/main-slider/vector-3.png)"></div>
-                        <div class="sale-box">
-                            SALE
-                            <span>30<i>% OFF</i></span>
-                        </div>
-                        <div class="title">2022 Collection</div>
-                        <h1>Furniture <br> Collection</h1>
-                        <div class="price">Starting From <span>$560.99</span></div>
-                        <a href="shop-detail.html" class="shop-now">Shop Now</a>
-                        <!-- Arrival Box -->
-                        <a href="shop.html" class="arrival-box">New Arrival</a>
-                        <!-- Arrival Box -->
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <!-- End Slide Three -->
-        
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center justify-content-center">
+    <div class="container position-relative">
+      <h1>Welcome to Ralyn's Hub</h1>
+      <h2>We are team of talented designers making websites with Bootstrap</h2>
+      <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
     </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients section-bg">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/clients/client-1.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/clients/client-2.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/clients/client-3.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/clients/client-4.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/clients/client-5.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/clients/client-6.png' %}" class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="{% static 'images/hub.jpg' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <h3>About Ralyn's Hub</h3>
+            <p>
+              At Ralyn's Hub, we're more than just an eCommerce store – we're a passion-driven destination for fashion, flavor, and beauty enthusiasts.
+               We believe in delivering not just products but unforgettable experiences that cater to your style, taste buds, and self-care needs.
+            </p>
+            <div class="row">
+              <div class="col-md-6">
+                <i class="bx bx-receipt"></i>
+                <h4>Our Story</h4>
+                <p>
+                  We have a vision to redefine how you shop for clothing, indulge in delectable treats, and pamper yourself with top-quality beauty products. Our journey began with the hunger to satisfy your every need, and from day one, 
+                  our mission has been to bring together the finest in fashion, culinary delights, and beauty essentials, all under one virtual roof.
+                </p>
+              </div>
+              <div class="col-md-6">
+                <i class="bx bx-cube-alt"></i>
+                <h4>What We Offer</h4>
+                <p>
+                  <b>Quality:</b> We source products from trusted suppliers to ensure you receive the highest quality items.
+                </p>
+                <p>
+                  <b>Customer Satisfaction:</b> Your satisfaction is our top priority. We're here to assist you at every step of your shopping journey.
+                </p>
+                <p>
+                 <b>Sustainability:</b> We are dedicated to sustainability and eco-friendly practices in our business operations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts section-bg">
+      <div class="container">
+
+        <div class="row counters">
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>+
+            <p>Clients</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>+
+            <p>Products</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>+
+            <p>Hours Of Support</p>
+          </div>
+
+          <div class="col-lg-3 col-6 text-center">
+            <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>+
+            <p>Daily Work Hours</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Our services to help you connect and shop seamlessly...</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box iconbox-blue">
+              <div class="icon">
+                <i class="bx bxl-dribbble"></i>
+              </div>
+              <h4><a href="">Products</a></h4>
+              <p>We sell tested and trusted products and client satisfaction is our top priority</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box iconbox-orange ">
+              <div class="icon">
+                <i class="bx bx-cart"></i>
+              </div>
+              <h4><a href="">Shopping Cart</a></h4>
+              <p>Our shopping cart is seamless and easy to use.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box iconbox-pink">
+              <div class="icon">
+                <i class="bx bx-user-circle"></i>
+              </div>
+              <h4><a href="">User Accounts</a></h4>
+              <p>Our users are expected to create an account so they can enjoy all of our services and manage their order</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box iconbox-yellow">
+              <div class="icon">
+                <i class="bx bx-money-withdraw"></i>
+              </div>
+              <h4><a href="">Secure Payment Process</a></h4>
+              <p>We have a very easy to use and very reliable payment process that makes shopping with us easy</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box iconbox-red">
+              <div class="icon">
+                <i class="bx bx-user-check"></i>
+              </div>
+              <h4><a href="">Checkout Process</a></h4>
+              <p>Our checkout process is very quick and simple.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box iconbox-teal">
+              <div class="icon">
+                <i class="bx bx-task"></i>
+              </div>
+              <h4><a href="">Order Confirmation</a></h4>
+              <p>All our orders are monitored and auto confirmed upon payment.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container">
+
+        <div class="text-center">
+          <h3>Call To Action</h3>
+          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <a class="cta-btn" href="#">Call To Action</a>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
+
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>Have a glimpse of our unique products</p>
+        </div>
+        
+        <div class="row portfolio-container">
+          {% for product in prod_list %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img src="{{product.imageURL}}" style="height:350px; width:460px; object-fit:cover;" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>{{product.category}}</h4>
+              <p>{{product.name}}</p>
+              <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        
+      </div>
+    </section><!-- End Portfolio Section -->
+
     
-    <!-- Hover Box -->
-    <div class="hover-box">
-        <div class="dott"></div>
-        <div class="hover-content">
-            <div class="rating">
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="light fa fa-star"></span>
-                <span class="light fa fa-star"></span>
-            </div>
-            <div class="hover-title">Pot Plastics Color</div>
-            <div class="hover-price">$28.52 - <span>$30.00</span></div>
-        </div>
-    </div>
-    <!-- End Hover Box -->
-    
-    <!-- Hover Box -->
-    <div class="hover-box style-two">
-        <div class="dott"></div>
-        <div class="hover-content">
-            <div class="rating">
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="light fa fa-star"></span>
-                <span class="light fa fa-star"></span>
-            </div>
-            <div class="hover-title">Pot Plastics Color</div>
-            <div class="hover-price">$28.52 - <span>$30.00</span></div>
-        </div>
-    </div>
-    <!-- End Hover Box -->
-    
-</section>
-<!-- End Main Section -->
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
 
-<!-- Featured Section -->
-<section class="featured-section">
-    <div class="vector-layer" style="background-image: url(images/icons/vector-1.png)"></div>
-    <div class="vector-layer-two" style="background-image: url(images/icons/feature.png)"></div>
-    <div class="auto-container">
-        <div class="inner-container">
-            <div class="row clearfix">
-            
-                <!-- Feature Block -->
-                <div class="feature-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <div class="icon flaticon-fast"></div>
-                            <strong>Free Shipping</strong>
-                            <div class="text">Free shipping over $100</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Feature Block -->
-                <div class="feature-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <div class="icon flaticon-padlock"></div>
-                            <strong>Payment Secure</strong>
-                            <div class="text">Got 100% Payment Safe</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Feature Block -->
-                <div class="feature-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <div class="icon flaticon-headphones-1"></div>
-                            <strong>Support 24/7</strong>
-                            <div class="text">Top quialty 24/7 Support</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Feature Block -->
-                <div class="feature-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="content">
-                            <div class="icon flaticon-wallet"></div>
-                            <strong>100% Money Back</strong>
-                            <div class="text">Cutomers Money Backs</div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Contact us via email or call, also leave a message via the contact form and we will reach out to you.</p>
         </div>
-    </div>
-</section>
-<!-- End Featured Section -->
 
-<!-- Products Section -->
-<section class="products-section">
-    <div class="auto-container">
-        <!-- Sec Title -->
-        <div class="sec-title">
-            <h4><span>Populer</span> Products For You !</h4>
-        </div>
-        <div class="four-item-carousel owl-carousel owl-theme">
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/1.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/2.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/3.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/4.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/1.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/2.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/3.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Shop Item -->
-            <div class="shop-item">
-                <div class="inner-box">
-                    <div class="image">
-                        <a href="shop-detail.html"><img src="images/resource/products/4.png" alt="" /></a>
-                        <span class="tag flaticon-heart"></span>
-                        <div class="cart-box text-center">
-                            <a class="cart" href="#">Add to Cart</a>
-                        </div>
-                    </div>
-                    <div class="lower-content">
-                        <div class="rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="light fa fa-star"></span>
-                        </div>
-                        <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="price"><span>$239.52</span> $362.00</div>
-                            <!-- Quantity Box -->
-                            <div class="quantity-box">
-                                <div class="item-quantity">
-                                    <input class="qty-spinner" type="text" value="1" name="quantity">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<!-- End Products Section -->
+        <div class="row">
 
-<!-- Brand Section -->
-<section class="brand-section">
-    <div class="outer-container">
-        <div class="animation_mode">
-            <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-            <img src="{% static 'images/icons/icon-1.png' %}" alt="" />
-            <img src="{% static 'images/icons/feature.png' %}" alt="" />
-            <img src="{% static 'images/icons/icon-2.png' %}" alt="" />
-            <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-            <img src="{% static 'images/icons/icon-1.png' %}" alt="" />
-            <img src="{% static 'images/icons/feature.png' %}" alt="" />
-            <img src="{% static 'images/icons/icon-2.png' %}" alt="" />
-            <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-            <img src="{% static 'images/icons/icon-1.png' %}" alt="" />
-            <img src="{% static 'images/icons/feature.png' %}" alt="" />
-            <img src="{% static 'images/icons/icon-2.png' %}" alt="" />
-            <h1>Design. <span>Brand</span>. <strong>Quality</strong></h1>
-            <img src="{% static 'images/icons/icon-1.png' %}" alt="" />
-            <img src="{% static 'images/icons/feature.png' %}" alt="" />
-            <img src="{% static 'images/icons/icon-2.png' %}" alt="" />
-        </div>
-    </div>
-</section>
-<!-- End Brand Section -->
+          <div class="col-lg-6">
 
-<!-- Sale Section -->
-<section class="sale-section">
-    <div class="auto-container">
-        <div class="row clearfix">
-        
-            <!-- Sale Block -->
-            <div class="sale-block col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="inner-box">
-                    <div class="sale-box">
-                        SALE
-                        <span>30<i>% OFF</i></span>
-                    </div>
-                    <div class="image d-flex justify-content-between align-items-center">
-                        <img src="{% static 'images/resource/shop-1.jpg' %}" alt="" />
-                        <div class="overlay-box">
-                            <div class="overlay-inner">
-                                <div class="off">Get 30% off</div>
-                                <h5><a href="shop-detail.html">Be together in the moment <br> with Barnix calling</a></h5>
-                                <a class="buy-now" href="shop-detail.html">buy now</a>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="info-box">
+                  <i class="bx bx-map"></i>
+                  <h3>Our Address</h3>
+                  <p>A108 Adam Street, New York, NY 535022</p>
                 </div>
-            </div>
-            
-            <!-- Sale Block -->
-            <div class="sale-block col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="inner-box">
-                    <div class="sale-box">
-                        SALE
-                        <span>30<i>% OFF</i></span>
-                    </div>
-                    <div class="image d-flex justify-content-between align-items-center">
-                        <img src="{% static 'images/resource/shop-2.jpg' %}" alt="" />
-                        <div class="overlay-box">
-                            <div class="overlay-inner">
-                                <div class="off">Get 30% off</div>
-                                <h5><a href="shop-detail.html">Be together in the moment <br> with Barnix calling</a></h5>
-                                <a class="buy-now" href="shop-detail.html">buy now</a>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>info@ralynhub.com<br>ralynhub@gmail.com</p>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box mt-4">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Call Us</h3>
+                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                </div>
+              </div>
             </div>
-            
-        </div>
-    </div>
-</section>
-<!-- End Sale Section -->
 
-<!-- Counter Section -->
-<section class="counter-section">
-    <div class="auto-container">
-        <div class="inner-container d-flex justify-content-between align-items-center flex-wrap">
-            
-            <!-- Shipping Box -->
-            <div class="shipping-box">
-                <div class="inner-box">
-                    Free <span class="theme_color">Shipping</span>
-                    <div class="order">On all Order</div>
-                </div>
-            </div>
-            
-            <!-- Arrow -->
-            <div class="arrow">
-                <img src="images/icons/arrow.png" alt="" />
-            </div>
-            
-            <!-- Counter Boxed -->
-            <div class="counter-boxed">
-                <div class="row clearfix">
-                
-                    <!-- Counter Column -->
-                    <div class="counter-block col-lg-6 col-md-6 col-sm-6">
-                        <div class="inner-box d-flex align-items-center">
-                            <div class="counter"><span class="odometer" data-count="12"></span>k</div>
-                            <div class="counter-text">Furniture Product For Home</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Counter Column -->
-                    <div class="counter-block col-lg-6 col-md-6 col-sm-6">
-                        <div class="inner-box d-flex align-items-center">
-                            <div class="counter"><span class="odometer" data-count="120"></span>k</div>
-                            <div class="counter-text">Our Satiesfiyed Clients</div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <!-- End Counter Boxed -->
-            
-        </div>
-    </div>
-</section>
-<!-- End Counter Section -->
+          </div>
 
-<!-- Collection Section -->
-<section class="collection-section">
-    <div class="auto-container">
-        <div class="inner-container">
-            <div class="pattern-layer" style="background-image: url(images/icons/pattern-1.png)"></div>
-            <div class="shape-layer" style="background-image: url(images/background/pattern-1.png)"></div>
-            <div class="row clearfix">
-                <div class="title-column col-lg-6 col-md-12 col-sm-12">
-                    <div class="title">2021 Collection</div>
-                    <h2>mens Black Meta Sunglass</h2>
-                    <div class="deals">Deals <span>35% Flat</span></div>
-                    <a class="shop-now" href="shop-detail.html">Shop Now</a>
-                    <!-- Arrow -->
-                    <div class="arrow">
-                        <img src="images/icons/arrow-1.png" alt="" />
-                    </div>
+          <div class="col-lg-6">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
-                <div class="image-column col-lg-6 col-md-12 col-sm-12">
-                    <div class="image">
-                        <div class="shadow-layer" style="background-image: url(images/icons/pattern-2.png)"></div>
-                        <img src="images/resource/chair.png" alt="" />
-                        <div class="price-tag">
-                            99<sup>$</sup>
-                            <span>103</span>
-                        </div>
-                    </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Collection Section -->
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
 
-<!-- Products Section Three -->
-<section class="products-section-three">
-    <div class="auto-container">
-        <!-- Sec Title -->
-        <div class="sec-title">
-            <h4><span>Products </span> your choich !</h4>
         </div>
-        
-        <!-- MixitUp Galery -->
-        <div class="mixitup-gallery">
-            
-            <!-- Filter -->
-            <div class="filters">
-                <ul class="filter-tabs">
-                    <li class="active filter" data-role="button" data-filter="all">Trending</li>
-                    <li class="filter" data-role="button" data-filter=".bestseller">Best Seller</li>
-                    <li class="filter" data-role="button" data-filter=".music">music</li>
-                    <li class="filter" data-role="button" data-filter=".photography">photography</li>
-                    <li class="filter" data-role="button" data-filter=".sports">sports</li>
-                </ul>
-            </div>
-            
-            <div class="filter-list row clearfix">
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix music photography col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/17.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix sports col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/18.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix photography bestseller col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/19.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix music col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/20.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix sports bestseller col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/21.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix music photography col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/22.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix sports bestseller col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/23.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Shop Item -->
-                <div class="shop-item mix music photography col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image">
-                            <a href="shop-detail.html"><img src="images/resource/products/24.png" alt="" /></a>
-                            <span class="tag flaticon-heart"></span>
-                            <div class="cart-box text-center">
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                        <div class="lower-content">
-                            <div class="rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="light fa fa-star"></span>
-                            </div>
-                            <h6><a href="shop-detail.html">masks 95 percent 0.3-μm <br> particles</a></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price"><span>$239.52</span> $362.00</div>
-                                <!-- Quantity Box -->
-                                <div class="quantity-box">
-                                    <div class="item-quantity">
-                                        <input class="qty-spinner" type="text" value="1" name="quantity">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <!-- Button Box -->
-            <div class="button-box text-center">
-                <a href="shop.html" class="theme-btn btn-style-one">
-                    Shop Now <span class="icon flaticon-right-arrow"></span>
-                </a>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<!-- End Products Section Three -->
 
-<!-- News Section -->
-<section class="news-section">
-    <div class="auto-container">
-        <div class="news-carousel owl-carousel owl-theme">
-        
-            <!-- News Block -->
-            <div class="news-block">
-                <div class="inner-box">
-                    <div class="image">
-                        <div class="tag">bedroom</div>
-                        <a href="blog-detail.html"><img src="images/resource/news-1.jpg" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                        <div class="author">
-                            <img src="images/resource/author-1.jpg" alt="" />
-                        </div>
-                        <h5><a href="blog-detail.html">10 Simple Practices That Will Help You furnis</a></h5>
-                        <div class="info">By: <span>Alextian</span> <i>January 23,2022</i></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- News Block -->
-            <div class="news-block">
-                <div class="inner-box">
-                    <div class="image">
-                        <div class="tag">bedroom</div>
-                        <a href="blog-detail.html"><img src="images/resource/news-2.jpg" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                        <div class="author">
-                            <img src="images/resource/author-1.jpg" alt="" />
-                        </div>
-                        <h5><a href="blog-detail.html">10 Simple Practices That Will Help You furnis</a></h5>
-                        <div class="info">By: <span>Alextian</span> <i>January 23,2022</i></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- News Block -->
-            <div class="news-block">
-                <div class="inner-box">
-                    <div class="image">
-                        <div class="tag">bedroom</div>
-                        <a href="blog-detail.html"><img src="images/resource/news-1.jpg" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                        <div class="author">
-                            <img src="images/resource/author-1.jpg" alt="" />
-                        </div>
-                        <h5><a href="blog-detail.html">10 Simple Practices That Will Help You furnis</a></h5>
-                        <div class="info">By: <span>Alextian</span> <i>January 23,2022</i></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- News Block -->
-            <div class="news-block">
-                <div class="inner-box">
-                    <div class="image">
-                        <div class="tag">bedroom</div>
-                        <a href="blog-detail.html"><img src="images/resource/news-2.jpg" alt="" /></a>
-                    </div>
-                    <div class="lower-content">
-                        <div class="author">
-                            <img src="images/resource/author-1.jpg" alt="" />
-                        </div>
-                        <h5><a href="blog-detail.html">10 Simple Practices That Will Help You furnis</a></h5>
-                        <div class="info">By: <span>Alextian</span> <i>January 23,2022</i></div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<!-- End News Section -->
+      </div>
+    </section><!-- End Contact Section -->
 
-<!-- Testimonial Section -->
-<section class="testimonial-section">
-    <div class="pattern-layer" style="background-image: url(images/background/pattern-3.png)"></div>
-    <div class="auto-container">
-        <div class="inner-container">
-            <div class="pattern-layer-two" style="background-image: url(images/background/pattern-4.png)"></div>
-            <div class="vector-layer" style="background-image: url(images/background/pattern-2.png)"></div>
-            <div class="single-item-carousel owl-carousel owl-theme">
-                
-                <!-- Testimonial Block -->
-                <div class="testimonial-block">
-                    <div class="inner-box">
-                        <div class="row clearfix">
-                            <!-- Image Column -->
-                            <div class="image-column col-lg-4 col-md-12 col-sm-12">
-                                <div class="inner-column">
-                                    <div class="arrow-layer" style="background-image: url(images/icons/arrow-2.png)"></div>
-                                    <div class="image">
-                                        <img src="images/resource/author-2.jpg" alt="" />
-                                        <!-- Social Box -->
-                                        <ul class="social-box">
-                                            <li><a href="https://www.facebook.com/" class="fa fa-facebook-f"></a></li>
-                                            <li><a href="https://www.twitter.com/" class="fa fa-twitter"></a></li>
-                                            <li><a href="https://dribbble.com/" class="fa fa-dribbble"></a></li>
-                                            <li><a href="https://www.linkedin.com/" class="fa fa-linkedin"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Content Column -->
-                            <div class="content-column col-lg-8 col-md-12 col-sm-12">
-                                <div class="inner-column">
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <div class="text">The most <span>advanced</span> revenue than this. I will refer everyone I know I like Level more and more each day because it makes my life a lot easier. It really saves me time and effort.</div>
-                                    <div class="quote-icon flaticon-quote"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial Block -->
-                <div class="testimonial-block">
-                    <div class="inner-box">
-                        <div class="row clearfix">
-                            <!-- Image Column -->
-                            <div class="image-column col-lg-4 col-md-12 col-sm-12">
-                                <div class="inner-column">
-                                    <div class="arrow-layer" style="background-image: url(images/icons/arrow-2.png)"></div>
-                                    <div class="image">
-                                        <img src="images/resource/author-2.jpg" alt="" />
-                                        <!-- Social Box -->
-                                        <ul class="social-box">
-                                            <li><a href="https://www.facebook.com/" class="fa fa-facebook-f"></a></li>
-                                            <li><a href="https://www.twitter.com/" class="fa fa-twitter"></a></li>
-                                            <li><a href="https://dribbble.com/" class="fa fa-dribbble"></a></li>
-                                            <li><a href="https://www.linkedin.com/" class="fa fa-linkedin"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Content Column -->
-                            <div class="content-column col-lg-8 col-md-12 col-sm-12">
-                                <div class="inner-column">
-                                    <div class="rating">
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <div class="text">The most <span>advanced</span> revenue than this. I will refer everyone I know I like Level more and more each day because it makes my life a lot easier. It really saves me time and effort.</div>
-                                    <div class="quote-icon flaticon-quote"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Testimonial Section -->
+</main><!-- End #main -->
 
-<!-- Gallery Section -->
-<section class="gallery-section">
-    <div class="outer-container">
-        <div class="instagram-carousel owl-carousel owl-theme">
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/1.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/2.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/3.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/3.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/4.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/4.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/5.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/5.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/6.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/6.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<!-- End Gallery Section -->
 {% endblock content %}

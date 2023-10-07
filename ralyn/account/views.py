@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from account.models import User, Customer
-from account.forms import RegisterForm
+from ecom.models import Order, OrderItem
+from account.forms import *
 from django.contrib.auth import authenticate, login, logout
 from .emails import *
 from django.utils.encoding import force_str
@@ -56,3 +57,26 @@ def LogoutView(request):
     logout(request)
     return redirect('login')
 
+
+def Profile(request):
+    customer = request.user.customer
+    order_item = OrderItem.objects.filter(order__customer=customer)
+    order = Order.objects.filter(customer=customer)
+    total_items = sum([item.quantity for item in order_item]) 
+    order_count = order.count()
+    form = UpdateCustomerForm(instance=customer)
+    if request.method == 'POST':
+        form = UpdateCustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profie successfully updated')
+            return redirect('profile')
+    context = {
+        'customer':customer,
+        'form':form,
+        'order':order,
+        'order_count':order_count,
+        'total_items':total_items,
+
+    }
+    return render(request, 'account/profile.html', context)

@@ -1,139 +1,213 @@
-{% extends 'base.html' %}
+{% extends 'base_erm.html' %}
 
-{% block title %} Cart Checkout {% endblock title %}
+{% block title %} Checkout {% endblock title %}
 
 {% block content %}
 
-<!-- Page Title -->
-<section class="page-title">
-    <div class="auto-container">
-        <h2>Checkout Page</h2>
-        <ul class="bread-crumb clearfix">
-            <li><a href="index.html">Home</a></li>
-            <li>Pages</li>
-            <li>Checkout</li>
-        </ul>
-    </div>
-</section>
-<!-- End Page Title -->
+<div class="container ">
+    <div class="row mt-5">
+        <!-- First Column: Product List -->
+        <div class="col-lg-6 col-md-6 col-sm-12 mt-5">
+            <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+                <div class="app-card-header p-3 border-bottom-0">
+                    <!-- Product List Heading -->
+                    <div class="row align-items-center gx-3">
+                        <div class="col-auto">
+                            <div class="app-icon-holder">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-sliders" fill="currentColor">
+                                    <!-- Icon SVG Content -->
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <h4 class="app-card-title">Checkout List</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 pt-3">
+                    <div class="app-card-body px-4 w-100">
+                        <div class="item border-bottom py-3">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label">Name</div>
+                                </div>
+                                <div class="col text-end">
+                                    <div class="item-data"><span class="px-5">Quantity</span><span class=""><i class="fa-solid fa-naira-sign"></i>Price</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product List Content -->
+                        <!-- Loop through your products and display them here -->
+                        {% for item in items %}
+                        <div class="item border-bottom py-3">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label">{{ item.product.name }}</div>
+                                </div>
+                                <div class="col text-end">
+                                    <div class="item-data"><span class="px-5">{{ item.quantity }}</span><span class=""><i class="fa-solid fa-naira-sign"></i>{{ item.get_total }}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="item border-bottom py-3">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label">Grand Total:</div>
+                                </div>
+                                <div class="col text-end">
+                                    <div class="item-data"><span class="px-5">{{ order.get_cart_items }}</span><span class=""><i class="fa-solid fa-naira-sign"></i>{{ order.get_cart_total }}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Checkout Section -->
-<section class="checkout-section">
-    <div class="auto-container">
-        <div class="row clearfix">
-            
-            <!-- Form Column -->
-            <div class="form-column col-lg-8 col-md-12 col-sm-12">
-                <div class="inner-column">
-                    <h4>Delivery Information</h4>
-                    <!-- Shipping Form -->
-                    <div class="shipping-form" id="ship">
-                        <form method="post" action="contact.html" id="form">
-                            <div class="row clearfix">
-                                
-                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                    <input type="text" name="username" placeholder="Enter Your name" required="">
-                                </div>
-                                
-                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                    <input type="text" name="phone" placeholder="Enter Your Phone Number" required="">
-                                </div>
-                                
-                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                    <select name="currency" class="custom-select-box">
-                                        <option>Please Choose your current City</option>
-                                        <option>City 01</option>
-                                        <option>City 02</option>
-                                        <option>City 03</option>
-                                        <option>City 04</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                    <input type="text" name="subject" placeholder="Appartmentment, (optinal)" required="">
-                                </div>
-                                
-                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                    <textarea class="" name="message" placeholder="Description (about Product)"></textarea>
-                                </div>
-                                
-                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                    <div class="check-box">
-                                        <input type="checkbox" name="remember-password" id="type-1"> 
-                                        <label for="type-1">Save my name, email, and website in this browser for the next time.</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                    <div class="buttons-box">
-                                        <button class="theme-btn btn-style-one" id="form-button">
-                                            Procced To Cheakout
-                                        </button>
-                                    </div>
-                                </div>
-                                
+        <!-- Second Column: Checkout Form -->
+        <div class="col-lg-6 col-md-6 col-sm-12 mt-5">
+            <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+                <div class="app-card-header p-3 border-bottom-0">
+                    <!-- Checkout Form Heading -->
+                    <div class="row align-items-center gx-3">
+                        <div class="col-auto">
+                            <div class="app-icon-holder">
+                                <!-- Add an icon for the checkout form if needed -->
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <h4 class="app-card-title">Shipping Details</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 pt-3">
+                    <div class="app-card-body px-4 w-100" id="shipping-info">
+                        <form id="form" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control" id="exampleFormControlInput1" placeholder="Address">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">State</label>
+                                <input type="text" name="state" class="form-control" id="exampleFormControlInput1" placeholder="State">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">City</label>
+                                <input type="text" name="city" class="form-control" id="exampleFormControlInput1" placeholder="City">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Zip Code</label>
+                                <input type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="Zip Code">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" id="exampleFormControlInput1" placeholder="Phone Number">
+                            </div>
+                            <div class="app-card-footer p-4 mt-auto">
+                                {% if not form_submitted %}
+                                <button class="btn btn-block mt-2 btn-primary btn-pill" id="form-button" type="submit">Add Shipping Details</button>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Make Payment Button (Initially Hidden) -->
+                            <div class="app-card-footer p-4 mt-auto" id="payment">
+                                {% if form_submitted %}
+                                <a class="btn btn-block mt-2 btn-primary btn-pill" id="payment-button" href="{% url 'initiate_payment' %}">Make Payment</a>
+                                {% endif %}
                             </div>
                         </form>
                     </div>
-                    <!-- End Shipping Form -->
-                    
                 </div>
+                
             </div>
-            
-            <!-- Order Column -->
-            <div class="order-column col-lg-4 col-md-12 col-sm-12">
-                <div class="inner-column">
-                    <h4>Order Summery</h4>
-                    <!-- Order Box -->
-                    <div class="order-box">
-                        <ul class="order-totals">
-                            <li>Total Quantity<span>{{order.get_cart_items}}</span></li>
-                            <li>Total<span>${{order.get_cart_total}}</span></li>
-                            {% comment %} <li>Shipping Fee<span>$34.00</span></li> {% endcomment %}
-                        </ul>
-                        
-                        <!-- Voucher Box -->
-                        <div class="voucher-box">
-                            <form method="post" action="contact.html">
-                                <div class="form-group">
-                                    <input type="email" name="search-field" value="" placeholder="Enter voucher Code" required>
-                                    <button type="submit" class="theme-btn apply-btn">Apply code</button>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <!-- Order Total -->
-                        {% comment %} add delivery fee as well {% endcomment %}
-                        <div class="order-total">Total <span>${{order.get_cart_total}}</span></div>
-                        
-                        <div class="button-box">
-                            <button class="theme-btn pay-btn hidden" id="payment">Procced to pay</button>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
         </div>
+            
     </div>
-</section>
-<!-- End Checkout Section -->
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Check if the form has been submitted
+        if ({{ form_submitted }}) {
+            // Form has been submitted, hide "Add Shipping Details" button and show "Make Payment" button
+            $('#form-button').hide();
+            $('#payment-button').show();
+        } else {
+            // Form has not been submitted, show "Add Shipping Details" button and hide "Make Payment" button
+            $('#form-button').show();
+            $('#payment-button').hide();
+        }
+    });
+</script>
+{% endblock content %}
 
 
-<script type="text/javascript">
-    var shipping = '{{order.shipping}}'
 
-    if (shipping == 'False'){
-        document.getElementById('ship').innerHTML = ''
+{% comment %} var shipping = '{{order.shipping}}'
+    var total = '{{order.get_cart_total|floatformat:2}}'
+
+    if ( user != 'AnonymousUser'){
+        document.getElementById('user-info').innerHTML = ''
     }
 
-    var form = document.getElementById('form')
-    form.addEventListener('submit', function(e){
-        e.preventDefault()
-        console.log('Submitted');
-        document.getElementById('form-button').classList.add("hidden");
-        document.getElementById('payment').classList.remove("hidden");
+    
+
+    document.getElementById('make-payment').addEventListener('click', function(e){
+        submitFormData()
     })
-</script>
-<!-- End Gallery Section -->
-{% endblock content %}
+
+    function submitFormData(){
+        console.log('Payment button clicked')
+
+        var userFormData = {
+            'name':null,
+            'email':null,
+            'total':total
+        }
+
+        var shippingInfo = {
+            'address':null,
+            'state':null,
+            'city':null,
+            'zipcode':null,
+            'phone':null
+        }
+
+        if (shipping != 'False'){
+            shippingInfo.address = form.address.value
+            shippingInfo.state = form.state.value
+            shippingInfo.city = form.city.value
+            shippingInfo.zipcode = form.zipcode.value
+            shippingInfo.phone = form.phone.value
+        }
+
+        if (user == 'AnonymousUser'){
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+        }
+
+        var url = '/process_order/'
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
+
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+            alert('Transaction completed');
+
+            cart = {}
+		    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            window.location.href = "{% url 'index' %}"
+        })
+
+
+    }  {% endcomment %}

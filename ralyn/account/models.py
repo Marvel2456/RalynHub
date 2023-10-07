@@ -12,7 +12,7 @@ class User(AbstractUser):
     
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -20,4 +20,4 @@ class Customer(models.Model):
     
 
     def __str__(self):
-        return self.user.email
+        return self.email

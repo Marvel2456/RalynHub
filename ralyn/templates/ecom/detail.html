@@ -1,8 +1,117 @@
-{% extends 'base.html' %}
+{% extends 'base_erm.html' %}
 {% load static %}
-
-{% block title %}  {% endblock title %}
+{% block title %} {% endblock title %}
 
 {% block content %}
 
+<div class="ec-content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+            <div>
+                <h1>Product</h1>
+                <p class="breadcrumbs"><span><a href="{% url 'index' %}">Home</a></span>
+                    <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+            </div>
+            <div>
+                <a data-product={{product.id}} data-action="add" class="btn btn-primary update-cart"> Add to cart
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-default">
+                    <div class="card-header card-header-border-bottom">
+                        <h2>{{product.name}} details</h2>
+                    </div>
+                <form class="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <div class="row ec-vendor-uploads">
+                            <div class="col-lg-4">
+                                <div class="ec-vendor-img-upload">
+                                    <div class="ec-vendor-main-img">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-preview ec-preview">
+                                                <div class="imagePreview ec-div-preview">
+                                                    <img class="ec-image-preview"
+                                                        src="{{product.imageURL}}"
+                                                        alt="edit" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="thumb-upload-set colo-md-12">
+                                            <div class="thumb-upload">
+                                                <div class="thumb-preview ec-preview">
+                                                    <div class="image-thumb-preview">
+                                                        <img class="image-thumb-preview ec-image-preview"
+                                                            src="{{product.image1URL}}"
+                                                            alt="edit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="thumb-upload">
+                                                <div class="thumb-preview ec-preview">
+                                                    <div class="image-thumb-preview">
+                                                        <img class="image-thumb-preview ec-image-preview"
+                                                            src="{{product.image2URL}}"
+                                                            alt="edit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="thumb-upload">
+                                                <div class="thumb-preview ec-preview">
+                                                    <div class="image-thumb-preview">
+                                                        <img class="image-thumb-preview ec-image-preview"
+                                                            src="{{product.image3URL}}"
+                                                            alt="edit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="thumb-upload">
+                                                <div class="thumb-preview ec-preview">
+                                                    <div class="image-thumb-preview">
+                                                        <img class="image-thumb-preview ec-image-preview"
+                                                            src="{{product.image4URL}}"
+                                                            alt="edit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="ec-vendor-upload-detail">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="inputEmail4" class="form-label">Product name</label>
+                                            <input type="text" name="name" value="{{product.name}}" readonly class="form-control slug-title" id="inputEmail4">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label">Categories</label>
+                                            <input type="text" name="category" value="{{product.category}}" readonly class="form-control slug-title" id="inputEmail4">
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                            <label class="form-label">Description</label>
+                                            <textarea class="form-control" name="description" rows="2" readonly>{{product.description}}</textarea>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <label class="form-label">Price <span>( In USD
+                                                    )</span></label>
+                                            <input name="price" type="number" class="form-control" value="{{product.price}}" id="price1" readonly>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
 {% endblock content %}

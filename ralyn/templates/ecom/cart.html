@@ -1,203 +1,74 @@
-{% extends 'base.html' %}
+{% extends 'base_erm.html' %}
 
-{% block title %} Shopping Cart {% endblock title %}
+{% block title %} Cart {% endblock title %}
 
 {% block content %}
 
-<!-- Page Title -->
-<section class="page-title">
-    <div class="auto-container">
-        <h2>Cart Page</h2>
-        <ul class="bread-crumb clearfix">
-            <li><a href="index.html">Home</a></li>
-            <li>Pages</li>
-            <li>Cart Page</li>
-        </ul>
-    </div>
-</section>
-<!-- End Page Title -->
 
-<!-- Shoping Cart Section -->
-<section class="shoping-cart-section">
-    <div class="auto-container">
-        <div class="row clearfix">
-            
-            <!-- Cart Column -->
-            <div class="cart-column col-lg-8 col-md-12 col-sm-12">
-                <div class="inner-column">
-                    
-                    <!--Cart Outer-->
-                    <div class="cart-outer">
-                        <div class="table-outer">
-                            <table class="cart-table">
-                                <thead class="cart-header">
-                                    <tr>
-                                        <th class="prod-column">product</th>
-                                        <th>&nbsp;</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody>
-                                    {% for item in items %}
-                                    <tr>
-                                        <td colspan="2" class="prod-column">
-                                            <div class="column-box">
-                                                <figure class="prod-thumb">
-                                                    <span class="cross-icon flaticon-cancel-1"></span>
-                                                    <a href="#"><img src="{{item.product.imageURL}}" alt=""></a>
-                                                </figure>
-                                                <h6 class="prod-title">{{item.product.name}}</h6>
-                                                <div class="prod-text">Quantity : {{item.quantity}}</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="price">${{item.product.price}}</td>
-                                        <!-- Quantity Box -->
-                                        <td class="quantity-box">
-                                            <div class="item-quantity">
-                                                <a><i class="bi bi-dash-lg update-cart" data-product={{item.product.id}} data-action="remove"></i></a>
-                                                <input class="quantity" type="text"  value="{{item.quantity}}" name="quantity">
-                                                 <a><i class="bi bi-plus-lg update-cart" data-product={{item.product.id}} data-action="add"></i></a>
-                                            </div>
-                                        </td>
-                                        <td class="sub-total">${{item.get_total}}</td>
-                                    </tr>
-                                    {% endfor %}   
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <!-- Total Column -->
-            <div class="total-column col-lg-4 col-md-12 col-sm-12">
-                <div class="inner-column">
-                
-                    <!-- Cart Total Outer -->
-                    <div class="cart-total-outer">
-                        <!-- Title Box -->
-                        <div class="title-box">
-                            <h6>Cart Totals</h6>
-                        </div>
-                        <div class="cart-total-box">
-                            <ul class="cart-totals">
-                                <li>Total Quantity : <span>{{order.get_cart_items}}</span></li>
-                                <li>Totals : <span>${{order.get_cart_total}}</span></li>
-                            </ul>
-                            <div class="check-box">
-                                <input type="checkbox" name="remember-password" id="type-1"> 
-                                <label for="type-1">Shipping & taxes calculated at checkout</label>
-                            </div>
-                            <!-- Buttons Box -->
-                            <div class="buttons-box">
-                                <a href="{% url 'checkout' %}" class="theme-btn proceed-btn" type="submit">
-                                    Procced To Cheackout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Shipping Total Outer -->
-                    <div class="shipping-outer">
-                        <!-- Title Box -->
-                        <div class="title-box">
-                            <h6>Calculate Shipping</h6>
-                        </div>
-                        <div class="cart-shipping-box">
-                            <ul class="shipping-list">
-                                <li>Bangladesh</li>
-                                <li>Mirpur Dohs Dhaka-1200</li>
-                                <li>Postal Code</li>
-                            </ul>
-                            <!-- Buttons Box -->
-                            <div class="buttons-box">
-                                <a href="contact.html" class="theme-btn btn-style-one">
-                                    Calculate Shiping
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
+<!-- CONTENT WRAPPER -->
+<div class="ec-content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+            <h1>Cart</h1>
+            <p class="breadcrumbs"><span><a href="{% url 'index' %}">Home</a></span>
+                <span><i class="mdi mdi-chevron-right"></i><a href="{% url 'products' %}">Products</a></span>
+                <span><i class="mdi mdi-chevron-right"></i></span>Cart
+            </p>
         </div>
-    </div>
-</section>
-<!-- End Shoping Cart Section -->
+        <div class="card invoice-wrapper border-radius border bg-white p-4">
 
-<!-- Gallery Section -->
-<section class="gallery-section">
-    <div class="outer-container">
-        <div class="instagram-carousel owl-carousel owl-theme">
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/1.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
+            <div class="table-responsive">
+                <table class="table mt-3 table-striped table-responsive table-responsive-large inv-tbl"
+                    style="width:100%">
+                    <thead>
+                        <tr>
+                            
+                            <th>Image</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Unit_Cost</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in items %}
+                        <tr>    
+                            <td><img class="invoice-item-img" src="{{item.product.imageURL}}" alt="product-image" /></td>
+                            <td>{{item.product.name}}</td>
+                            <td class="quantity">
+                                <input type="number" class="Qty" data-product="{{item.product.id}}" value="{{item.quantity}}" name="quantity" min="0" max="100" style="width: 80%;">
+                            </td>
+                            <td>${{item.product.price}}</td>
+                            <td id="sub_total">${{item.get_total}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row justify-content-end inc-total">
+                <div class="col-lg-3 col-xl-3 col-xl-3 ml-sm-auto">
+                    <ul class="list-unstyled mt-3">
+                        <li class="mid pb-3 text-dark"> Total Quantity
+                            <span class="d-inline-block float-right text-default" id="sum_quantity">{{order.get_cart_items}}</span>
+                        </li>
+
+
+                        <li class="pb-3 text-dark">Total
+                            <span class="d-inline-block float-right" id="final_total">${{order.get_cart_total}}</span>
+                        </li>
+                    </ul>
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'checkout' %}" class="btn btn-block mt-2 btn-primary btn-pill"> Procced to
+                        Checkout</a>
+                    {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-block mt-2 btn-primary btn-pill"> Sign up to continue</a>
+                    {% endif %}
                 </div>
             </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/2.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/1.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/3.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/3.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/4.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/4.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/5.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/5.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Insta Gallery -->
-            <div class="insta-gallery">
-                <img src="images/gallery/6.jpg" alt="" />
-                <div class="overlay-box">
-                    <div class="overlay-inner">
-                        <a class="lightbox-image icon flaticon-instagram" href="images/gallery/6.jpg"></a>
-                    </div>
-                </div>
-            </div>
-            
         </div>
-    </div>
-</section>
-<!-- End Gallery Section -->
+    </div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
+
 {% endblock content %}

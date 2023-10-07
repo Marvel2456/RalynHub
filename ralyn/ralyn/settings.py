@@ -96,12 +96,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+    
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
@@ -166,3 +161,6 @@ PASSWORD_RESET_TIMEOUT = 21600
 LOGIN_REDIRECT_URL = 'index'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+PAYSTACK_SECRET_KEY = 'sk_test_b18a61ef1c755f5cb1afc6acb8452c848dc3b378'
+PAYSTACK_PUBLIC_KEY = 'pk_test_4472c15c6d9d3dc2c2ef377a80497eedecd2851e'

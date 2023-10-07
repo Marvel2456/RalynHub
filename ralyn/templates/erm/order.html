@@ -1,0 +1,80 @@
+{% extends 'base_erm.html' %}
+
+{% block title %} Order History {% endblock title %}
+
+{% block content %}
+
+<!-- CONTENT WRAPPER -->
+<div class="ec-content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+            <h1>Orders History</h1>
+            <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+                <span><i class="mdi mdi-chevron-right"></i></span>History
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-default">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="responsive-data-table" class="table" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Customer</th>
+                                        <th>Email</th>
+                                        <th>Items</th>
+                                        <th>Price</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for orders in orders %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{orders.customer.username}}</td>
+                                        <td>{{orders.customer.email}}</td>
+                                        <td>{{orders.get_cart_items}}</td>
+                                        <td>${{orders.get_cart_total}}</td>
+                                        {% if orders.completed == True %}
+                                        <td>Completed</td>
+                                        {% else %}
+                                        <td>Pending</td>
+                                        {% endif %}
+                                        <td><span class="mb-2 mr-2 badge badge-secondary">Cancel</span></td>
+                                        <td>{{orders.ordered_at}}</td>
+                                        <td>
+                                            <div class="btn-group mb-1">
+                                                <button type="button"
+                                                    class="btn btn-outline-success">Info</button>
+                                                <button type="button"
+                                                    class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false" data-display="static">
+                                                    <span class="sr-only">Info</span>
+                                                </button>
+
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Detail</a>
+                                                    <a class="dropdown-item" href="#">Track</a>
+                                                    <a class="dropdown-item" href="#">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Content -->
+</div> <!-- End Content Wrapper -->
+{% endblock content %}

@@ -34,6 +34,7 @@ def Categories(request):
         form = CreateCategoryForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'category successfully created')
             return redirect('category')
         
     context = {
@@ -66,6 +67,7 @@ def addProduct(request):
         form = CreateProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'product successfully created')
             return redirect('product_list')
     context = {
         'form':form
@@ -85,10 +87,6 @@ def ProductList(request):
     context = {'product':product}
     return render(request, 'erm/product_list.html', context)
 
-def ProductGrid(request):
-    product = Product.objects.all()
-    context = {'product':product}
-    return render(request, 'erm/product_grid.html', context)
 
 def ProductDetail(request, pk):
     pass
@@ -108,7 +106,12 @@ def UpdateProduct(request, uuid):
     return render(request, 'erm/edit_product.html', context)
 
 def Orders(request):
-    pass
+    orders = Order.objects.all()
+    
+    context = {
+        'orders':orders
+    }
+    return render(request, 'erm/order.html', context)
 
 def Payment(request):
     pass
