@@ -20,6 +20,8 @@ def RegisterView(request):
             activate_email(request, user, form.cleaned_data.get('email'))
             messages.success(request, 'Account successfully created for ')
             return redirect('login')
+        # else:
+        #     messages.error(request, 'Account successfully
     return render(request, 'account/register.html')
 
 
