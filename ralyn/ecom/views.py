@@ -280,11 +280,15 @@ def productDetail(request, uuid):
     return render(request, 'ecom/detail.html', context)
 
 def orderHistory(request):
-    customer = request.user.customer
-    order = Order.objects.filter(customer=customer)
-    
-    context = {
-        'order':order,
-    }
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order = Order.objects.filter(customer=customer)
+        
+        context = {
+            'order':order,
+        }
+        return render(request, 'ecom/order_history.html', context)
+    else:
+        return render(request, 'ecom/non_auth_user_message.html')
 
-    return render(request, 'ecom/order_history.html', context)
+    
