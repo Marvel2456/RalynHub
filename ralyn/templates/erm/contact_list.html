@@ -9,8 +9,8 @@
     <div class="content">
         <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
             <h1>Orders History</h1>
-            <p class="breadcrumbs"><span><a href="index.html">Home</a></span>
-                <span><i class="mdi mdi-chevron-right"></i></span>History
+            <p class="breadcrumbs"><span><a href="{% url 'dashboard' %}">Dashboard</a></span>
+                <span><i class="mdi mdi-chevron-right"></i></span>Contacts
             </p>
         </div>
         <div class="row">
@@ -24,29 +24,19 @@
                                         <th>ID</th>
                                         <th>Customer</th>
                                         <th>Email</th>
-                                        <th>Items</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
                                         <th>Date</th>
-                                        <!--th>Action</th-->
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {% for payment in payment %}
+                                    {% for contact in contact %}
                                     <tr>
                                         <td>{{forloop.counter}}</td>
-                                        <td>{{payment.customer.username}}</td>
-                                        <td>{{payment.customer.email}}</td>
-                                        <td>{{payment.order.get_cart_items}}</td>
-                                        <td>${{payment.amount}}</td>
-                                        {% if payment.paid == True %}
-                                        <td>Completed</td>
-                                        {% else %}
-                                        <td>Pending</td>
-                                        {% endif %}
-                                        <td>{{payment.date}}</td>
-                                        <!--td>
+                                        <td>{{contact.name}}</td>
+                                        <td>{{contact.email}}</td>
+                                        <td>{{contact.created_at}}</td>
+                                        <td>
                                             <div class="btn-group mb-1">
                                                 <button type="button"
                                                     class="btn btn-outline-success">Info</button>
@@ -58,12 +48,13 @@
                                                 </button>
 
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Details</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item btn" href="{% url 'contact_detail' contact.id %}">Details</a>
+                                                    <a class="dropdown-item" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#deleteContactModal{{contact.id}}">Delete</a>
                                                 </div>
                                             </div>
-                                        </td-->
+                                        </td>
                                     </tr>
+                                    {% include 'erm/delete_contact.html' %}
                                     {% endfor %}
                                 </tbody>
                             </table>

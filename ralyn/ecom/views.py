@@ -221,18 +221,19 @@ def verify_payment(request, ref):
    
 
 def contact(request):
+    contactss = Contact.objects.all()
     if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
         subject = request.POST['subject']
         message = request.POST['message']
 
-        contacts = Contact(name=name, email=email, subject=subject, message=message)
+        contactss = Contact(name=name, email=email, subject=subject, message=message)
 
-        contacts.save()
+        contactss.save()
 
         messages.success(request, 'Your request has been submitted thank you')
-        return redirect('contact')
+        return redirect('index')
     return render(request, 'ecom/index.html')
 
 def Profile(request):

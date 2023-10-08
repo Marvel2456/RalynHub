@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from ecom.models import Category, Product, Order, OrderItem, ShippingDetail
+from ecom.models import Category, Product, Order, Contact, ShippingDetail, PaymentHistory
 from erm.forms import *
 from account.models import Customer
 # Create your views here.
@@ -105,18 +105,47 @@ def UpdateProduct(request, uuid):
     }
     return render(request, 'erm/edit_product.html', context)
 
-def Orders(request):
-    orders = Order.objects.all()
-    
-    context = {
-        'orders':orders
-    }
-    return render(request, 'erm/order.html', context)
-
-def Payment(request):
-    pass
 
 def Customers(request):
     customer = Customer.objects.all()
     context = {'customer':customer}
     return render(request, 'erm/users.html', context)
+
+def orderHistory(request):
+    payment = PaymentHistory.objects.all()
+    context = {
+        'payment': payment
+    }
+    return render(request, 'erm/order.html', context)
+
+def ShippingAddress(request):
+    address = ShippingDetail.objects.all()
+    return render(request, 'erm/shipping.html', {'address':address})
+
+def shippingDetail(request, uuid):
+    address = ShippingDetail.objects.get(id=uuid)
+    return render(request, 'erm/shipping_detail.html', {'address':address})
+
+def contacts(request):
+    contact = Contact.objects.all()
+    return render(request, 'erm/contact_list.html', {'contact':contact})
+
+def contactDetail(request, uuid):
+    contact = Contact.objects.get(id=uuid)
+    return render(request, 'erm/contact_detail.html', {'contact':contact})
+
+def deleteContact(request):
+    if request.method == 'POST':
+        contact_id = Contact.objects.get(id = request.POST.get('uuid'))
+        if contact_id != None:
+            contact_id.delete()
+            messages.success(request, "Successfully deleted")
+            return redirect('contact_list')
+        
+def deleteShipping(request):
+    if request.method == 'POST':
+        address = ShippingDetail.objects.get(id = request.POST.get('id'))
+        if address != None:
+            address.delete()
+            messages.success(request, "Successfully deleted")
+            return redirect('shipping')
