@@ -49,7 +49,7 @@ def LoginView(request):
         if user is not None:
             login(request, user)
             messages.success(request, f'Welcome {user.username}')
-            return redirect('index')
+            return redirect('products')
     return render(request, 'account/login.html')
 
 

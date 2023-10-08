@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from ecom.models import Category, Product, Order, Contact, ShippingDetail, PaymentHistory
+from ecom.models import Category, Product, Order, Contact, ShippingDetail, PaymentHistory, Customer
 from erm.forms import *
 from account.models import Customer
 # Create your views here.
@@ -25,7 +25,22 @@ def logoutView(request):
     return redirect('login')
 
 def Dashboard(request):
-    return render(request, 'erm/dashboard.html')
+    products = Product.objects.all()
+    customers = Customer.objects.all()
+    successfull_order = PaymentHistory.objects.filter(paid=True).all()
+    pending_order = PaymentHistory.objects.filter(paid=False).all()
+
+    all_products = products.count()
+    all_customers = customers.count()
+    all_pending_order = pending_order.count()
+    all_successfull_order = successfull_order.count()
+    context = {
+        'all_products': all_products,
+        'all_customers': all_customers,
+        'all_successfull_order': all_successfull_order,
+        'all_pending_order': all_pending_order 
+    }
+    return render(request, 'erm/dashboard.html', context)
 
 def Categories(request):
     category = Category.objects.all()
