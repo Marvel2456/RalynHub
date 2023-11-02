@@ -152,7 +152,7 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.customer.username
+        return f'{self.customer.username} - {self.created_at}'
     
 
 class Contact(models.Model):

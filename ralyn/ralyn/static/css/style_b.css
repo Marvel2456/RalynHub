@@ -66,6 +66,69 @@ h6 {
   opacity: 1;
 }
 
+.my-caro {
+  opacity:0.6; 
+  height:590px; 
+  object-fit:cover;
+}
+
+/* Media query for tablets (e.g., iPad) */
+@media (max-width: 768px) {
+  .my-caro {
+    opacity:0.6;
+    height: 100%;
+  }
+}
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+  .my-caro {
+    opacity:0.6;
+    height: 100%;
+  }
+}
+
+.my-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Media query for tablets (e.g., iPad) */
+@media (min-width: 481px) and (max-width: 900px) {
+  .my-img {
+    display: block;
+    width: 100%;
+    height: 590px;
+    object-fit: cover;
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+  .my-img {
+    display: block;
+    width: 100%;
+    height: 525px;
+    object-fit: cover;
+  }
+}
+
+.my-text {
+  padding-bottom: 570px;
+}
+
+@media (min-width: 481px) and (max-width: 900px) {
+  .my-text {
+    padding-bottom: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .my-text {
+    padding-bottom: 100px;
+  }
+}
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -387,9 +450,9 @@ h6 {
 }
 
 @media (max-width: 768px) {
-  #hero {
+  /* #hero {
     height: 100%;
-  }
+  } */
 
   #hero h1 {
     font-size: 28px;
@@ -400,7 +463,7 @@ h6 {
     font-size: 18px;
     line-height: 24px;
   }
-} */
+} 
 
 /*--------------------------------------------------------------
 # Sections General
