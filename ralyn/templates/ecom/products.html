@@ -32,10 +32,10 @@
                                           Categories
                                         </button>
                                         <ul class="dropdown-menu">
-                                          <li><a class="dropdown-item" href="{% url 'index' %}">ALL Category</a></li>
+                                          <li><a class="dropdown-item" href="{% url 'products' %}">ALL Category</a></li>
                                           {% for category in categories %}
                                             <li>
-                                                <a class="dropdown-item" href="{% url 'index' %}?category={{ category.name }}">{{ category.name }}</a>
+                                                <a class="dropdown-item" href="{% url 'products' %}?category={{ category.name }}">{{ category.name }}</a>
                                             </li>
                                           {% endfor %}
                                         </ul>

@@ -31,14 +31,14 @@
         <div class="card">
           <div class="card-header bg-primary">
             <div class="ec-brand">
-              <a href="index.html" title="Ekka">
+              <a href="{% url 'index' %}" title="Ekka">
                 <img class="ec-brand-icon" src="{% static 'images/logo/ralyn.png' %}" alt="" />
               </a>
             </div>
           </div>
           <div class="card-body p-5">
             <h4 class="text-dark mb-5">Sign Up</h4>
-
+            {% include 'partials/_message.html' %}
             <form method="post">
               {% csrf_token %}
               <div class="row">
@@ -78,6 +78,13 @@
   </div>
 
   <!-- Javascript -->
+  <script>
+    setTimeout(function(){
+        if ($('#msg').length > 0 ){
+            $('#msg').remove();
+        }
+    }, 4000)
+</script>
   <script src="assets/plugins/jquery/jquery-3.5.1.min.js"></script>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/plugins/jquery-zoom/jquery.zoom.min.js"></script>

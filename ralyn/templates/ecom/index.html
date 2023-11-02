@@ -4,12 +4,43 @@
 
 {% block content %}
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center justify-content-center">
-    <div class="container position-relative">
-      <h1>Welcome to Ralyn's Hub</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
-      <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
+<section id="hero" class="d-flex align-items-center justify-content-center m-0">
+  <div id="carouselExampleAutoplaying caro" class="carousel slide col-sm-12" data-bs-ride="carousel">
+    <div class="carousel-inner m-0 my-caro">
+      <div class="carousel-item active">
+        <img src="{% static 'images/food.jpg' %}" class="my-img"/>
+        <div class="carousel-caption my-text">
+          <h1>Welcome to Ralyn's Hub</h1>
+          <h2>We are team of talented designers making websites with Bootstrap</h2>
+          <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/food.jpg' %}" class="my-img"/>
+        <div class="carousel-caption my-text">
+          <h1>Welcome to Ralyn's Hub</h1>
+          <h2>We are team of talented designers making websites with Bootstrap</h2>
+          <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/food.jpg' %}" class="my-img"/>
+        <div class="carousel-caption my-text">
+          <h1>Welcome to Ralyn's Hub</h1>
+          <h2>We are team of talented designers making websites with Bootstrap</h2>
+          <a href="{% url 'register' %}" class="btn-get-started scrollto">Get Started</a>
+        </div>
+      </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </section><!-- End Hero -->
 
 <main id="main">

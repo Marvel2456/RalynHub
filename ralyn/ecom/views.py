@@ -9,6 +9,7 @@ from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 from django.core.paginator import Paginator
 from django.conf import settings
+import pytz
 
 # Create your views here.
 
@@ -280,11 +281,24 @@ def productDetail(request, uuid):
     return render(request, 'ecom/detail.html', context)
 
 def orderHistory(request):
-    customer = request.user.customer
-    order = Order.objects.filter(customer=customer)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order = Order.objects.filter(customer=customer)
+        
+        context = {
+            'order':order,
+        }
+        return render(request, 'ecom/order_history.html', context)
+    else:
+        return render(request, 'ecom/non_auth_user_message.html')
     
-    context = {
-        'order':order,
-    }
+def productReview(request):
+    pass
 
-    return render(request, 'ecom/order_history.html', context)
+
+
+
+
+
+
+    
