@@ -57,7 +57,7 @@ def LoginView(request):
 
 def LogoutView(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
 
 
 def Profile(request):
