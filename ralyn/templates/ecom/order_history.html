@@ -33,15 +33,17 @@
 
                                 <tbody>
                                     {% for order in order %}
+                                    {% if order.get_cart_total > 0 %}
                                     <tr>
                                         <td>{{forloop.counter}}</td>
-                                        <td>{{order.customer.name}}</td>
+                                        <td>{{order.customer.username}}</td>
                                         <td>{{order.customer.email}}</td>
                                         <td>{{order.get_cart_items}}</td>
                                         <td>${{order.get_cart_total}}</td>
                                         <td>PAID</td>
                                         <td>{{order.ordered_at}}</td>
                                     </tr>
+                                    {% endif %}
                                     {% endfor %}
 
                                 </tbody>

@@ -63,9 +63,10 @@ def LogoutView(request):
 def Profile(request):
     customer = request.user.customer
     order_item = OrderItem.objects.filter(order__customer=customer)
-    order = Order.objects.filter(customer=customer)
+    orders = Order.objects.filter(customer=customer)
+    order = [order for order in orders if order.get_cart_total > 0]
     total_items = sum([item.quantity for item in order_item]) 
-    order_count = order.count()
+    order_count = len(order)
     form = UpdateCustomerForm(instance=customer)
     if request.method == 'POST':
         form = UpdateCustomerForm(request.POST, instance=customer)
@@ -76,6 +77,7 @@ def Profile(request):
     context = {
         'customer':customer,
         'form':form,
+        'orders':orders,
         'order':order,
         'order_count':order_count,
         'total_items':total_items,
