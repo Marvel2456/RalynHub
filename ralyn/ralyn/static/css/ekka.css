@@ -17974,6 +17974,11 @@ a.badge-purple:focus, a.badge-purple.focus {
 }
 
 /*===== CARD =====*/
+
+.my-head {
+  background-color: teal !important;
+}
+
 .card {
   border-radius: 15px;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.03);
