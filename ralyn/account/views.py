@@ -52,6 +52,8 @@ def LoginView(request):
             login(request, user)
             messages.success(request, f'Welcome {user.username}')
             return redirect('products')
+        else:
+            messages.error(request, 'Invalid username or password')
     return render(request, 'account/login.html')
 
 
