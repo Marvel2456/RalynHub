@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth import get_user_model
 import uuid
 import secrets
@@ -185,13 +185,14 @@ class PaymentHistory(models.Model):
 
     
     def save(self, *args, **kwargs):
-        while not self.ref:
-            ref = secrets.token_urlsafe(50)
-            object_with_similar_ref = PaymentHistory.objects.filter(ref=ref)
-            if not object_with_similar_ref:
-                self.ref = ref
-    
-        return super().save(*args, **kwargs)
+        with transaction.atomic():
+            while not self.ref:
+                ref = secrets.token_urlsafe(50)
+                object_with_similar_ref = PaymentHistory.objects.select_for_update().filter(ref=ref)
+                if not object_with_similar_ref.exists():
+                    self.ref = ref
+        
+            return super().save(*args, **kwargs)
     
     def amount_value(self):
         return int(float(self.amount) * 100)
