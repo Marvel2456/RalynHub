@@ -27,6 +27,7 @@
 		<div class="container d-flex align-items-center justify-content-center form-height-login pt-24px pb-24px">
 			<div class="row justify-content-center">
 				<div class="col-lg-6 col-md-10">
+					{% include 'partials\_message.html' %}
 					<div class="card">
 						<div class="card-header" style="background-color:teal;">
 							<div class="ec-brand">
@@ -37,7 +38,6 @@
 						</div>
 						<div class="card-body p-5">
 							<h4 class="text-dark mb-5">Sign In</h4>
-							
 							<form action="" method="post">
                                 {% csrf_token %}
 								<div class="row">
@@ -78,5 +78,12 @@
 	
 		<!-- Ralyn Custom -->	
 		<script src="{% static 'js/ekka.js' %}"></script>
+		<script>
+			setTimeout(function(){
+				if ($('#msg').length > 0 ){
+					$('#msg').remove();
+				}
+			}, 3000)
+		</script>
 	</body>
 </html>

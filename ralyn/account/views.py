@@ -20,8 +20,6 @@ def RegisterView(request):
             activate_email(request, user, form.cleaned_data.get('email'))
             messages.success(request, 'Account successfully created for ')
             return redirect('login')
-        # else:
-        #     messages.error(request, 'Account successfully
     return render(request, 'account/register.html')
 
 
@@ -52,6 +50,8 @@ def LoginView(request):
             login(request, user)
             messages.success(request, f'Welcome {user.username}')
             return redirect('products')
+        else:
+            messages.error(request, 'Invalid username or password')
     return render(request, 'account/login.html')
 
 

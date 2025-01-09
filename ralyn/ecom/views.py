@@ -10,6 +10,8 @@ from .utils import cookieCart, cartData, guestOrder
 from django.core.paginator import Paginator
 from django.conf import settings
 import pytz
+from django.core.cache import cache
+from django.db.models import Prefetch
 
 # Create your views here.
 
@@ -18,7 +20,6 @@ def get_categories(request):
     return JsonResponse(list(categories), safe=False)
 
 def productIndex(request):
- 
     data = cartData(request)
     order = data['order']
     items = data['items']
@@ -26,17 +27,26 @@ def productIndex(request):
     
     category = request.GET.get('category')
 
-    if category is None:
-        products = Product.objects.all()
-    else:
-        products = Product.objects.filter(category__name=category)
+    cache_key = f'products_{category}'
+    products = cache.get(cache_key)
+
+    if not products:
+        if category is None:
+            products = Product.objects.all().only('id', 'name', 'main_image', 'price', 'category')
+        else:
+            products = Product.objects.filter(category__name=category).only('id', 'name', 'main_image', 'price', 'category')
+        
+        cache.set(cache_key, products, 60 * 15)
 
     product_contains_query = request.GET.get('product')
 
-    if product_contains_query != '' and product_contains_query is not None:
+    if product_contains_query:
         products = products.filter(name__icontains=product_contains_query)
 
-    categories = Category.objects.all()
+    categories = cache.get('categories')
+    if not categories:
+        categories = Category.objects.all()
+        cache.set('categories', categories, 60 * 15)
 
     paginator = Paginator(products, 2)
     page = request.GET.get('page')
@@ -44,13 +54,13 @@ def productIndex(request):
     nums = "a" * product_page.paginator.num_pages
     
     context = {
-        'products':products,
-        'items':items,
-        'order':order,
-        'total_quantity':total_quantity,
-        'product_page':product_page,
-        'nums':nums,
-        'categories':categories,
+        'products': products,
+        'items': items,
+        'order': order,
+        'total_quantity': total_quantity,
+        'product_page': product_page,
+        'nums': nums,
+        'categories': categories,
     }
     return render(request, 'ecom/products.html', context)
 
@@ -155,6 +165,13 @@ def Checkout(request):
     customer = request.user.customer
     form = ShippingForm()
     form_submitted = False
+
+    try:
+        shipping = ShippingDetail.objects.get(order=order)
+        form = ShippingForm(instance=shipping)
+    except ShippingDetail.DoesNotExist:
+        form = ShippingForm()
+        
     if request.method == 'POST':
         form = ShippingForm(request.POST)
         if form.is_valid():
