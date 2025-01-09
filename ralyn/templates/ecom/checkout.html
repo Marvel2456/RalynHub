@@ -88,23 +88,23 @@
                             {% csrf_token %}
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Address</label>
-                                <input type="text" name="address" class="form-control" id="exampleFormControlInput1" placeholder="Address">
+                                <input type="text" name="address" class="form-control" id="exampleFormControlInput1" placeholder="Address" value="{{ form.address.value|default:'' }}">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">State</label>
-                                <input type="text" name="state" class="form-control" id="exampleFormControlInput1" placeholder="State">
+                                <input type="text" name="state" class="form-control" id="exampleFormControlInput1" placeholder="State" value="{{ form.state.value|default:'' }}">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">City</label>
-                                <input type="text" name="city" class="form-control" id="exampleFormControlInput1" placeholder="City">
+                                <input type="text" name="city" class="form-control" id="exampleFormControlInput1" placeholder="City" value="{{ form.city.value|default:'' }}">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Zip Code</label>
-                                <input type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="Zip Code">
+                                <input type="text" name="zipcode" class="form-control" id="exampleFormControlInput1" placeholder="Zip Code" value="{{ form.zipcode.value|default:'' }}">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
-                                <input type="text" name="phone" class="form-control" id="exampleFormControlInput1" placeholder="Phone Number">
+                                <input type="text" name="phone" class="form-control" id="exampleFormControlInput1" placeholder="Phone Number" value="{{ form.phone.value|default:'' }}">
                             </div>
                             <div class="app-card-footer p-4 mt-auto">
                                 {% if not form_submitted %}
@@ -131,13 +131,13 @@
 <script>
     $(document).ready(function() {
         // Check if the form has been submitted
-        if ({{ form_submitted }}) {
-            // Form has been submitted, hide "Add Shipping Details" button and show "Make Payment" button
-            $('#form-button').hide();
+        if ({{ form_submitted|yesno:"true,false" }}) {
+            // Form has been submitted, hide the form and show "Make Payment" button
+            $('#form').hide();
             $('#payment-button').show();
         } else {
-            // Form has not been submitted, show "Add Shipping Details" button and hide "Make Payment" button
-            $('#form-button').show();
+            // Form has not been submitted, show the form and hide "Make Payment" button
+            $('#form').show();
             $('#payment-button').hide();
         }
     });

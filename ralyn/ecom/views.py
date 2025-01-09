@@ -165,6 +165,13 @@ def Checkout(request):
     customer = request.user.customer
     form = ShippingForm()
     form_submitted = False
+
+    try:
+        shipping = ShippingDetail.objects.get(order=order)
+        form = ShippingForm(instance=shipping)
+    except ShippingDetail.DoesNotExist:
+        form = ShippingForm()
+        
     if request.method == 'POST':
         form = ShippingForm(request.POST)
         if form.is_valid():
